@@ -1,0 +1,76 @@
+/*
+Name:Particles - Personal + Team Template Demo
+Author:Denis Samardjiev
+*/
+
+/* =Table of Contents
+--------------------------------------------------------------
+	=Common Styles
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:700,400,300,100|Montserrat:400,700);
+
+/* =Common Styles
+-------------------------------------------------------------- */
+.header {
+	background-image: url('../images/header.jpg');
+	background-size: cover;
+	padding-top: 140px;
+	padding-bottom: 140px;
+}
+
+.header h1 {
+	color: #fff;
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 2px;
+	font-size: 52px;
+}
+
+.header h4 {
+	color: #D6D6D6;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	font-size: 34px;
+}
+
+#demos {
+	padding-top: 90px;
+	padding-bottom: 90px;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	color: #D4D4D4;
+}
+
+#demos h4 {
+	margin-top: 20px;
+    margin-bottom: 30px;
+	text-transform: uppercase;
+	font-size: 16px;
+}
+
+#demos h2 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	font-size: 28px;
+	margin-top: 0;
+	margin-bottom: 20px;
+	color: #ABABAB;
+}
+
+.green { color:#2ecc71; font-weight: 300; }
+.orange { color:#f39c12; font-weight: 300; }
+
+.glyphicon-menu-down {
+	margin-top: 15px;
+    color: #E8E8E8;
+    font-size: 20px;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: inline-block;
+}
