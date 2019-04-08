@@ -1,5 +1,5 @@
 <!-- Begin Contact -->
-<section class="background1 section-padding">
+<section class="background2 section-padding">
   <div class="container">
     <div class="row mb30">
       <div
@@ -14,9 +14,8 @@
           >
         </p>
       </div>
-      <!-- /.column -->
     </div>
-    <!-- /.row -->
+
     <div class="row">
       <div class="col-sm-5 col-lg-5">
         <h5 class="heading-1 mb20"><b>Visit Us</b></h5>
@@ -39,93 +38,64 @@
           ><b>Mon - Fri, 9am - 5pm</b>
         </p>
       </div>
-    
+
       <div class="col-sm-6 col-lg-7 mt30-xs">
         <div class="team-member-box">
-          <form data-toggle="validator" id="contactForm" name="contactForm">
+          <form>
             <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <div class="controls">
-                    <input
-                      class="form-control"
-                      data-error="This section is required."
-                      id="msg_subject"
-                      placeholder="Subject *"
-                      required
-                      type="text"
-                    />
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.column -->
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <div class="controls">
-                    <input
-                      class="form-control"
-                      id="phone"
-                      placeholder="Phone"
-                      type="text"
-                    />
-                  </div>
-                </div>
-              </div>
-              <!-- /.column -->
+              <mat-form-field
+                class="col-sm-12 col-xs-12 col-lg-6 col-md-6"
+                appearance="outline"
+              >
+                <mat-label>Subject</mat-label>
+                <mat-select #subject>
+                  <mat-option value="1">1</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field
+                class="col-sm-12 col-xs-12 col-lg-6 col-md-6"
+                appearance="outline"
+              >
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" />
+              </mat-form-field>
             </div>
-            <!-- /.row -->
+
             <div class="row mb10">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <div class="controls">
-                    <input
-                      class="form-control"
-                      data-error="This section is required."
-                      id="name"
-                      placeholder="Your Name *"
-                      required
-                      type="text"
-                    />
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.column -->
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <div class="controls">
-                    <input
-                      class="email form-control"
-                      data-error="This section is required."
-                      id="email"
-                      placeholder="Email *"
-                      required
-                      type="email"
-                    />
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.column -->
+              <mat-form-field
+                class="col-sm-12 col-xs-12 col-lg-6 col-md-6"
+                appearance="outline"
+              >
+                <mat-label>Contact</mat-label>
+                <input matInput placeholder="Contact" />
+              </mat-form-field>
+
+              <mat-form-field
+                class="col-sm-12 col-xs-12 col-lg-6 col-md-6"
+                appearance="outline"
+              >
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" />
+              </mat-form-field>
             </div>
-            <!-- /.row -->
+
             <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <div class="controls">
-                    <textarea
-                      class="form-control"
-                      data-error="This section is required."
-                      id="message"
-                      placeholder="Message *"
-                      required
-                      rows="5"
-                    ></textarea>
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-              </div>
+              <mat-form-field
+                class="col-sm-12 col-xs-12 col-lg-12 col-md-12"
+                appearance="outline"
+              >
+                <mat-label>Message</mat-label>
+                <textarea
+                  matInput
+                  #input
+                  maxlength="100"
+                  placeholder="Message"
+                ></textarea>
+                <mat-hint align="end"
+                  >{{ input.value?.length || 0 }}/100</mat-hint
+                >
+              </mat-form-field>
             </div>
             <div class="row mt15">
               <div class="col-sm-12 text-center">
@@ -137,9 +107,7 @@
                   <b>Send</b>
                 </button>
               </div>
-              <!-- /.column -->
             </div>
-            <!-- /.row -->
           </form>
           <!-- /.form -->
         </div>
@@ -151,7 +119,6 @@
         </agm-map>
       </div>
     </div>
-    <!-- /.row -->
   </div>
   <!-- /.container -->
 </section>
