@@ -12,6 +12,7 @@ import { ProductsComponent } from './home/products/products.component';
 import { ServicesComponent } from './home/services/services.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { AgmCoreModule } from '@agm/core';
+import { TechnologyComponent } from './home/technology/technology.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AgmCoreModule } from '@agm/core';
     AboutusComponent,
     ProductsComponent,
     ServicesComponent,
-    ContactComponent
+    ContactComponent,
+    TechnologyComponent
   ],
   imports: [
     BrowserModule,
