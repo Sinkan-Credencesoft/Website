@@ -46,6 +46,7 @@ import {
     MatRadioModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAYT8pe61MUbk27eiYi9LnnPhwo031Ye7w'
     })
