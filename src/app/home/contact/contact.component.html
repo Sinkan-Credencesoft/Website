@@ -44,7 +44,7 @@
           <form>
             <div class="row">
               <mat-form-field
-                class="col-sm-12 col-xs-12 col-lg-6 col-md-6"
+                class="col-sm-12 col-xs-12 col-lg-12 col-md-12"
                 appearance="outline"
               >
                 <mat-label>Subject</mat-label>
@@ -56,13 +56,7 @@
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field
-                class="col-sm-12 col-xs-12 col-lg-6 col-md-6"
-                appearance="outline"
-              >
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Name" />
-              </mat-form-field>
+              
             </div>
 
             <div class="row mb10">
@@ -70,8 +64,8 @@
                 class="col-sm-12 col-xs-12 col-lg-6 col-md-6"
                 appearance="outline"
               >
-                <mat-label>Contact</mat-label>
-                <input matInput placeholder="Contact" />
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" />
               </mat-form-field>
 
               <mat-form-field
@@ -92,11 +86,11 @@
                 <textarea
                   matInput
                   #input
-                  maxlength="100"
+                  maxlength="200"
                   placeholder="Message"
                 ></textarea>
                 <mat-hint align="end"
-                  >{{ input.value?.length || 0 }}/100</mat-hint
+                  >{{ input.value?.length || 0 }}/200</mat-hint
                 >
               </mat-form-field>
             </div>
