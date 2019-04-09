@@ -48,12 +48,14 @@
                 appearance="outline"
               >
                 <mat-label>Subject</mat-label>
-                <mat-select #subject>
-                  <mat-option value="BookOne Support">BookOne Support</mat-option>
-                  <mat-option value="Website Development">Website Development</mat-option>
-                  <mat-option value="Integration Service">Integration Service</mat-option>
-                  <mat-option value="Product Development">Product Development</mat-option>
-                  <mat-option value="Others">Others</mat-option>
+
+                <mat-select      [formControl]="subject"   [(ngModel)]="serviceName" required>
+                    <mat-option
+                    *ngFor="let service of serviceType"
+                    [value]="service.name"
+                  >
+                    {{ service.value }}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
 
@@ -66,7 +68,8 @@
                 appearance="outline"
               >
                 <mat-label>Name</mat-label>
-                <input matInput placeholder="Name" />
+                <input matInput placeholder="Name"  
+                [formControl]="name" />
               </mat-form-field>
 
               <mat-form-field
@@ -74,9 +77,11 @@
                 appearance="outline"
               >
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email" />
+                <input matInput placeholder="Email"   
+                 [formControl]="fromEmail"/>
               </mat-form-field>
             </div>
+
 
             <div class="row">
               <mat-form-field
@@ -89,6 +94,8 @@
                   #input
                   maxlength="200"
                   placeholder="Message"
+                  [formControl]="message"
+                  class="form-control"
                 ></textarea>
                 <mat-hint align="end"
                   >{{ input.value?.length || 0 }}/200</mat-hint
@@ -101,11 +108,25 @@
                   type="submit"
                   id="submit"
                   class="btn btn-default btn-lg"
+                  (click) ="send()"
+                  *ngIf="!emailSuccess"
                 >
                   <b>Send</b>
                 </button>
               </div>
             </div>
+            <div class="row mb30" *ngIf="emailSuccess">
+                <div
+                  class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 section-title text-center"
+                >
+                  <span class="section-divider mb15"></span>
+                  <p class="no-margin scaleReveal">
+                    <b
+                      >We have received your email, will get in touch soon.</b
+                    >
+                  </p>
+                </div>
+            </div>    
           </form>
           <!-- /.form -->
         </div>
