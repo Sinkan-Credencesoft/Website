@@ -6,7 +6,7 @@ import { ApiService } from './api.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './site/home/home.component';
 import { AmenitiesComponent } from './amenities/amenities.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -36,18 +36,16 @@ import { BookingdetailComponent } from './bookingdetail/bookingdetail.component'
 import { AgmCoreModule } from '@agm/core';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeModule } from './home/home.module';
+import { SiteModule } from './site/site.module';
 import { LayoutModule } from './shared/layout/layout.module';
 import { FooterComponent } from './shared/layout/footer/footer.component';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
+import { HomeModule } from './site/home/home.module';
 
 const routes: Routes = [
-  { path: '', component: HomeModule},
-  // { path: '',
-  //   redirectTo: '/home',
-  //   pathMatch: 'full'
-  //   }
+  { path: '', component: SiteModule},
+
 ];
 @NgModule({
   declarations: [
@@ -71,7 +69,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     LayoutModule,
-    HomeModule,
+    SiteModule,
     BrowserModule,
     AppRoutingModule,
     MatStepperModule,
@@ -85,7 +83,6 @@ const routes: Routes = [
     BrowserAnimationsModule,
     CommonModule,
     MatCheckboxModule,
-    // Material Modules
     AppMaterialModules,
     FormsModule,
     ReactiveFormsModule,
