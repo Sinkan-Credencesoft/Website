@@ -6,8 +6,8 @@ import { GetintouchComponent } from './getintouch/getintouch.component';
 import { SliderComponent } from './slider/slider.component';
 import { BlogComponent } from './blog/blog.component';
 import { ServiceComponent } from './service/service.component';
-import { RoomComponent } from '../room/room.component';
-import { WhoweareComponent } from './whoweare/whoweare.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { RoomComponent } from './room/room.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -21,8 +21,9 @@ const routes: Routes = [
     SliderComponent,
     BlogComponent,
     ServiceComponent,
-    RoomComponent,
-    WhoweareComponent
+    AboutusComponent,
+    RoomComponent
+
   ],
   imports: [
     CommonModule,
