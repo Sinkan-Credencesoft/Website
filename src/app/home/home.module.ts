@@ -1,0 +1,32 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HomeComponent } from './home.component';
+import { Routes, RouterModule } from '@angular/router';
+import { GetintouchComponent } from './getintouch/getintouch.component';
+import { SliderComponent } from './slider/slider.component';
+import { BlogComponent } from './blog/blog.component';
+import { ServiceComponent } from './service/service.component';
+import { RoomComponent } from '../room/room.component';
+import { WhoweareComponent } from './whoweare/whoweare.component';
+
+const routes: Routes = [
+  { path: '', component: HomeComponent},
+
+];
+
+@NgModule({
+  declarations: [HomeComponent,
+
+    GetintouchComponent,
+    SliderComponent,
+    BlogComponent,
+    ServiceComponent,
+    RoomComponent,
+    WhoweareComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes),
+  ]
+})
+export class HomeModule { }
