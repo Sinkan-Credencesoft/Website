@@ -8,10 +8,11 @@ import { ContactComponent } from '../contact/contact.component';
 import { PolicyComponent } from '../policy/policy.component';
 import { GalleryComponent } from '../gallery/gallery.component';
 import { BookComponent } from '../book/book.component';
+import { RoomsComponent } from './rooms/rooms.component';
 
 const routes: Routes = [
   { path: '', component: HomeModule},
-  { path: 'rooms', component: RoomComponent},
+  { path: 'rooms', component: RoomsComponent},
   { path: 'book', component: BookComponent},
   { path: 'gallery', component: GalleryComponent},
   { path: 'policy', component: PolicyComponent},
