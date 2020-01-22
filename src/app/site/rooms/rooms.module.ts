@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoomsComponent } from './rooms.component';
-import { RoomComponent } from '../home/room/room.component';
-import { SiteModule } from '../site.module';
+import { DetailsComponent } from './details/details.component';
+import { RouterModule, Routes } from '@angular/router';
+const routes: Routes = [
+    { path: '', component: RoomsComponent},
+    { path: 'details', component: DetailsComponent},
 
+  ];
 @NgModule({
 
+
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forRoot(routes)
   ],
   declarations: [RoomsComponent,
   ]
