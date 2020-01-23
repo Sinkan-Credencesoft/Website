@@ -2,114 +2,41 @@
   <div class="container">
     <div class="sec-title">
       <h3>OUR ROOMS</h3>
-    </div><!--sec-title end-->
-    <div class="rooms_section">
-      <div class="row blog_carousel">
-        <div class="col-lg-4 col-md-6">
-          <div class="room_details">
-            <div class="room_show">
-              <div class="room_imgs_carousel">
-                <div class="room_img">
-                  <img src="assets/images/rooms/21.jpg" alt="">
-                </div><!--room_img end-->
-                <!-- <div class="room_img">
-                  <img src="assets/images/rooms/12.jpg" alt="">
-                </div> -->
-                <!--room_img end-->
-                <!-- <div class="room_img">
-                  <img src="assets/images/rooms/12.jpg" alt="">
-                </div> -->
-                <!--room_img end-->
-              </div><!--room_imgs_carousel end-->
-              <span class="price-tag">2000.00 / <b>night</b></span>
-            </div><!--room_show end-->
-            <div class="room_info">
-              <h3><a routerLink="/rooms/details" title="">Deluxe Room</a></h3>
-              <ul class="ppt-list">
-                <li>
-                  <img src="assets/images/icy1.png" alt="">
-                  1 GUESTS
-                </li>
-                <li>
-                  <img src="assets/images/icy2.png" alt="">
-                  15 Ft²
-                </li>
-              </ul><!--ppt-list end-->
-              <p>Well furnished and modern amennities are here. </p>
-              <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-            </div><!--room_info end-->
-          </div><!--room_details end-->
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="room_details">
-            <div class="room_show">
-              <div class="room_imgs_carousel">
-                <div class="room_img">
-                  <img src="assets/images/rooms/12.jpg" alt="">
-                </div><!--room_img end-->
-                <!-- <div class="room_img">
-                  <img src="assets/images/rooms/21.jpg" alt="">
-                </div> -->
-                <!--room_img end-->
-                <!-- <div class="room_img">
-                  <img src="assets/images/rooms/21.jpg" alt="">
-                </div> -->
-                <!--room_img end-->
-              </div><!--room_imgs_carousel end-->
-              <span class="price-tag">1500.00 / <b>night</b></span>
-            </div><!--room_show end-->
-            <div class="room_info">
-              <h3><a href="#" title="">Deluxe Standard Room</a></h3>
-              <ul class="ppt-list">
-                <li>
-                  <img src="assets/images/icy1.png" alt="">
-                  1 GUESTS
-                </li>
-                <li>
-                  <img src="assets/images/icy2.png" alt="">
-                  15 Ft²
-                </li>
-              </ul><!--ppt-list end-->
-              <p>Well furnished and modern amennities with large space</p>
-              <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-            </div><!--room_info end-->
-          </div><!--room_details end-->
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="room_details">
-            <div class="room_show">
-              <div class="room_imgs_carousel">
-                <div class="room_img">
-                  <img src="assets/images/rooms/9.jpg" alt="">
-                </div><!--room_img end-->
-                <!-- <div class="room_img">
-                  <img src="assets/images/rooms/9.jpg" alt="">
-                </div> -->
-                <!--room_img end-->
-                <!-- <div class="room_img">
-                  <img src="assets/images/rooms/9.jpg" alt="">
-                </div> -->
-                <!--room_img end-->
-              </div><!--room_imgs_carousel end-->
-              <span class="price-tag">60000.00 / <b>night</b></span>
-            </div><!--room_show end-->
-            <div class="room_info">
-              <h3><a href="#" title="">Mandap/Conference Hall</a></h3>
-              <ul class="ppt-list">
-                <li>
-                  <img src="assets/images/icy1.png" alt="">
-                  1 GUESTS
-                </li>
-                <li>
-                  <img src="assets/images/icy2.png" alt="">
-                  15 Ft²
-                </li>
-              </ul><!--ppt-list end-->
-              <p>This space can use for both as a Mandap or a Conference Hall </p>
-              <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-            </div><!--room_info end-->
-          </div><!--room_details end-->
-        </div>
+    </div><!--sec-title  end-->
+      <div class="rooms_section" >
+        <div class="row blog_carousel">
+          <div  *ngFor ="let room of rooms;">
+
+            <div class="col-lg-4 col-md-6" >
+              <div class="room_details">
+                <div class="room_show">
+                  <div class="room_imgs_carousel">
+                    <div class="room_img">
+                      <img src="assets/images/rooms/21.jpg" alt="">
+                    </div>
+                  </div>
+                  <span class="price-tag">{{ room.roomOnlyPrice}} / <b>night</b></span>
+                </div>
+                <div class="room_info">
+                  <h3><a routerLink="/rooms/details" title="">{{ room.name}}</a></h3>
+                  <ul class="ppt-list">
+                    <li>
+                      <img src="assets/images/icy1.png" alt="">
+                      {{room.maximumOccupancy}} GUESTS
+                    </li>
+                    <li>
+                      <img src="assets/images/icy2.png" alt="">
+                      No of Rooms : {{ room.noOfRooms }}
+                    </li>
+                  </ul>
+                  <p>{{ room.description}} </p>
+                  <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
 
       </div>
     </div><!--rooms_section end-->

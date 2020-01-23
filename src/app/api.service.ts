@@ -14,7 +14,7 @@ const API_URL = 'http://app.bookonepms.com:9080/api-bookone/api/website';
 export const SMS_NUMBER = '+1 956 903 2629';
 //const API_URL = 'https://booking-api-csoft.appspot.com/api/website';
 //const API_URL = 'https://booking-api-csoft-in.appspot.com/api/website';
-const PROPERTY_ID = 81;
+export const PROPERTY_ID = 81;
 @Injectable()
 export class ApiService {
   constructor(private http: HttpClient) { }
