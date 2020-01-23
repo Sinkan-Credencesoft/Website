@@ -10,7 +10,7 @@
         <li><a routerLink="#" title=""><i class="fa fa-google"></i></a></li>
       </ul><!--social-links end-->
       <div class="cont-lit">
-        <h4>+1 888 123 4567</h4>
+        <h4>{{ property.mobile }}</h4>
       </div>
       <ul class="cont-list">
         <li><img src="assets/images/icon9.png" alt="">A few clouds, 22 °C / 71 °F</li>
@@ -58,8 +58,8 @@
         <a routerLink="#" title="">
           <img src="assets/images/ft-logo5.png" alt="">
           <div class="ft-text">
-            <h2>Mangal Niketan</h2>
-          <h3>An Unit Of Sanatan Residency</h3>
+            <h2>{{ property.name }}</h2>
+          <h3>{{ property.slogan }}</h3>
           </div>
         </a>
       </div><!--ft-logo end-->
@@ -90,8 +90,8 @@
       <a routerLink="#" title="">
         <img src="assets/images/ft-logo.png" alt="">
         <div class="ft-text">
-          <h2>Mangal Niketan</h2>
-          <h3>An Unit Of Sanatan Residency</h3>
+          <h2>{{ property.name }}</h2>
+          <h3>{{ property.slogan }}</h3>
         </div>
       </a>
     </div><!--ft-logo end-->
@@ -105,7 +105,7 @@
     <div class="clearfix"></div>
   </div>
   <div class="ct_head">
-    <h3>+1 888 123 4567</h3>
+    <h3>{{ property.mobile }}</h3>
     <div class="lang-slct">
       <div class="custom-select">
         <select>
@@ -143,8 +143,8 @@
     </ul>
   </div><!--navigations end-->
   <ul class="mbl_contact_info">
-    <li>PO Box 16122 Collins Street West Victoria 8007 Australia</li>
-    <li><a routerLink="#" title="">Map</a></li>
-    <li>info@lordcros.com</li>
+    <li>{{ property.mobile }}</li>
+    <li><a routerLink="contact" title="Contact">Map</a></li>
+    <li>{{ property.mobile }}</li>
   </ul><!--mbl_contact_info end-->
 </div><!--responsive_mobile_menu end-->
