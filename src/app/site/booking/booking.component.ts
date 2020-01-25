@@ -10,13 +10,61 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class BookingComponent implements OnInit {
   rooms: Room[];
-  fromDate: any;
-  toDate: any;
+  toDate: string;
   constructor(private apiService: ApiService) { }
 
-  ngOnInit() {
+
+  currentDay : string;
+  day : string;
+  year : string;
+  month : number;
+
+  day2 : string;
+  year2 : string;
+  month2: number;
+
+  fromDate : string;
+
+  monthArray =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+
+ ngOnInit() {
+    this.checkincheckoutDate();
     this.getRoom();
   }
+  checkincheckoutDate()
+  {
+    let currentDate: Date = new Date();
+    this.day = this.getDay(currentDate);
+    this.year = String(currentDate.getFullYear());
+    this.month = currentDate.getMonth();
+
+
+    let afterDate: Date = new Date();
+    afterDate.setDate(currentDate.getDate()+1);
+
+    this.day2 = this.getDay(afterDate);
+    this.year2 = String(afterDate.getFullYear());
+    this.month2 = afterDate.getMonth();
+  }
+
+
+  getDay(date:Date)
+  {
+    if(date.getDate().toString().length==1)
+    {
+        this.currentDay = '0'+date.getDate();
+    }
+    else
+    {
+        this.currentDay = ''+date.getDate();
+    }
+
+    return this.currentDay;
+  }
+
+
+
 
   getRoom()
   {
