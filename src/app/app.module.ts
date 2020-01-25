@@ -100,7 +100,7 @@ const routes: Routes = [
   providers: [
     ApiService,
     HTTPStatus,
-    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    // {provide: LocationStrategy, useClass: HashLocationStrategy},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
