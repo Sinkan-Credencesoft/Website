@@ -81,7 +81,7 @@ export class SliderComponent implements OnInit {
     //   }
     // };
 
-    this.router.navigate(['/booking'] );
+    this.router.navigate(['/booking/choose'] );
   }
 
 }
