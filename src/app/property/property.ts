@@ -17,6 +17,5 @@ export class Property {
     userId: string;
     slogan: string;
 
-    constructor()
-        { }
+    constructor() { }
 }

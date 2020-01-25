@@ -11,6 +11,7 @@ import { BookingDetails } from './bookingdetail/bookingdetails';
 import { GuestReview } from './guest/guest.component';
 
 const API_URL = 'http://app.bookonepms.com:9080/api-bookone/api/website';
+const API_URL2 = 'http://app.bookonepms.com:9080/api-bookone';
 export const SMS_NUMBER = '+1 956 903 2629';
 //const API_URL = 'https://booking-api-csoft.appspot.com/api/website';
 //const API_URL = 'https://booking-api-csoft-in.appspot.com/api/website';
@@ -35,6 +36,10 @@ export class ApiService {
   getRoomDetailsByPropertyId(propertyId: number) {
     return this.http.get < Room []>(API_URL + '/findAllRoomsByPropertyId/' + propertyId,  { observe: 'response' });
   }
+  getRoomDetailsByPropertyIdAndDate(propertyId: number, fromDate: string, toDate: string) {
+    return this.http.get < Room []>(API_URL2 + '/api/availability/getAllRoomsByDate?PropertyId=' + propertyId + '&FromDate=' + fromDate + '&ToDate=' + toDate,  { observe: 'response' });
+  }
+
   checkAvailability(booking: Booking) {
     return this.http.post<Booking> (API_URL + '/checkAvailability', booking ,  { observe: 'response' });
   }

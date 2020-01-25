@@ -215,94 +215,39 @@
                     <div class="tab-pane fade show active" id="th-tab" role="tabpanel" aria-labelledby="th-tab">
                       <div class="tb-detaiils st_4">
                         <div class="row">
-                          <div class="col-lg-6 col-md-6 col-sm-6">
+                          <div class="col-lg-6 col-md-6 col-sm-6"  *ngFor ="let room of rooms;">
                             <div class="room-details">
                               <img src="https://via.placeholder.com/640x700" alt="">
                               <div class="room-hd">
-                                <h4>FROM $199</h4>
-                                <h3>SINGLE ROOM</h3>
+                                <h4>FROM ${{room.roomOnlyPrice}}</h4>
+                                <h3>{{room.name}}</h3>
                               </div>
                               <a href="#" title="" class="booking-btn">BOOK NOW <i class="la la-arrow-right"></i></a>
                             </div><!--room-details end-->
                           </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="room-details">
-                              <img src="https://via.placeholder.com/640x700" alt="">
-                              <div class="room-hd">
-                                <h4>FROM $199</h4>
-                                <h3>SINGLE ROOM</h3>
-                              </div>
-                              <a href="#" title="" class="booking-btn">BOOK NOW <i class="la la-arrow-right"></i></a>
-                            </div><!--room-details end-->
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="room-details">
-                              <img src="https://via.placeholder.com/640x700" alt="">
-                              <div class="room-hd">
-                                <h4>FROM $199</h4>
-                                <h3>SINGLE ROOM</h3>
-                              </div>
-                              <a href="#" title="" class="booking-btn">BOOK NOW <i class="la la-arrow-right"></i></a>
-                            </div><!--room-details end-->
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="room-details">
-                              <img src="https://via.placeholder.com/640x700" alt="">
-                              <div class="room-hd">
-                                <h4>FROM $199</h4>
-                                <h3>SINGLE ROOM</h3>
-                              </div>
-                              <a href="#" title="" class="booking-btn">BOOK NOW <i class="la la-arrow-right"></i></a>
-                            </div><!--room-details end-->
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="room-details">
-                              <img src="https://via.placeholder.com/640x700" alt="">
-                              <div class="room-hd">
-                                <h4>FROM $199</h4>
-                                <h3>SINGLE ROOM</h3>
-                              </div>
-                              <a href="#" title="" class="booking-btn">BOOK NOW <i class="la la-arrow-right"></i></a>
-                            </div><!--room-details end-->
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="room-details">
-                              <img src="https://via.placeholder.com/640x700" alt="">
-                              <div class="room-hd">
-                                <h4>FROM $199</h4>
-                                <h3>SINGLE ROOM</h3>
-                              </div>
-                              <a href="#" title="" class="booking-btn">BOOK NOW <i class="la la-arrow-right"></i></a>
-                            </div><!--room-details end-->
-                          </div>
+
+
                         </div>
                       </div><!--tb-detaiils end-->
                     </div>
                     <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
                       <div class="tb-detaiils">
                         <div class="row">
-                          <div class="col-lg-6 col-md-6">
+                          <div class="col-lg-6 col-md-6"  *ngFor ="let room of rooms;">
                             <div class="room_details">
                               <div class="room-caroz">
                                 <div class="room_img">
                                   <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
+                                  <span class="price-tag">${{room.roomOnlyPrice}}<b>/night</b></span>
                                 </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
+
                               </div><!--room-caroz end-->
                               <div class="room_info">
-                                <h3><a href="#" title="">Single Room</a></h3>
+                                <h3><a href="#" title="">{{room.name}}</a></h3>
                                 <ul class="ppt-list">
                                   <li>
                                     <img src="assets/images/icy1.png" alt="">
-                                    1 GUESTS
+                                    {{room.maximumOccupancy}} GUESTS
                                   </li>
                                   <li>
                                     <img src="assets/images/icy2.png" alt="">
@@ -328,275 +273,34 @@
                               </div><!--room_info end-->
                             </div><!--room-details end-->
                           </div>
-                          <div class="col-lg-6 col-md-6">
-                            <div class="room_details">
-                              <div class="room-caroz">
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                              </div><!--room-caroz end-->
-                              <div class="room_info">
-                                <h3><a href="#" title="">Single Room</a></h3>
-                                <ul class="ppt-list">
-                                  <li>
-                                    <img src="assets/images/icy1.png" alt="">
-                                    1 GUESTS
-                                  </li>
-                                  <li>
-                                    <img src="assets/images/icy2.png" alt="">
-                                    15 Ft²
-                                  </li>
-                                </ul><!--ppt-list end-->
-                                <p>Phasellus enim libero, blandit vel sapien ultricies magna et. </p>
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                              </div><!--room_info end-->
-                            </div><!--room-details end-->
-                          </div>
-                          <div class="col-lg-6 col-md-6">
-                            <div class="room_details">
-                              <div class="room-caroz">
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                              </div><!--room-caroz end-->
-                              <div class="room_info">
-                                <h3><a href="#" title="">Single Room</a></h3>
-                                <ul class="ppt-list">
-                                  <li>
-                                    <img src="assets/images/icy1.png" alt="">
-                                    1 GUESTS
-                                  </li>
-                                  <li>
-                                    <img src="assets/images/icy2.png" alt="">
-                                    15 Ft²
-                                  </li>
-                                </ul><!--ppt-list end-->
-                                <p>Phasellus enim libero, blandit vel sapien ultricies magna et. </p>
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                              </div><!--room_info end-->
-                            </div><!--room-details end-->
-                          </div>
-                          <div class="col-lg-6 col-md-6">
-                            <div class="room_details">
-                              <div class="room-caroz">
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                              </div><!--room-caroz end-->
-                              <div class="room_info">
-                                <h3><a href="#" title="">Single Room</a></h3>
-                                <ul class="ppt-list">
-                                  <li>
-                                    <img src="assets/images/icy1.png" alt="">
-                                    1 GUESTS
-                                  </li>
-                                  <li>
-                                    <img src="assets/images/icy2.png" alt="">
-                                    15 Ft²
-                                  </li>
-                                </ul><!--ppt-list end-->
-                                <p>Phasellus enim libero, blandit vel sapien ultricies magna et. </p>
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                              </div><!--room_info end-->
-                            </div><!--room-details end-->
-                          </div>
-                          <div class="col-lg-6 col-md-6">
-                            <div class="room_details">
-                              <div class="room-caroz">
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                              </div><!--room-caroz end-->
-                              <div class="room_info">
-                                <h3><a href="#" title="">Single Room</a></h3>
-                                <ul class="ppt-list">
-                                  <li>
-                                    <img src="assets/images/icy1.png" alt="">
-                                    1 GUESTS
-                                  </li>
-                                  <li>
-                                    <img src="assets/images/icy2.png" alt="">
-                                    15 Ft²
-                                  </li>
-                                </ul><!--ppt-list end-->
-                                <p>Phasellus enim libero, blandit vel sapien ultricies magna et. </p>
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                              </div><!--room_info end-->
-                            </div><!--room-details end-->
-                          </div>
-                          <div class="col-lg-6 col-md-6">
-                            <div class="room_details">
-                              <div class="room-caroz">
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                                <div class="room_img">
-                                  <img src="https://via.placeholder.com/361x250" alt="">
-                                  <span class="price-tag">$165<b>/night</b></span>
-                                </div><!--room_img end-->
-                              </div><!--room-caroz end-->
-                              <div class="room_info">
-                                <h3><a href="#" title="">Single Room</a></h3>
-                                <ul class="ppt-list">
-                                  <li>
-                                    <img src="assets/images/icy1.png" alt="">
-                                    1 GUESTS
-                                  </li>
-                                  <li>
-                                    <img src="assets/images/icy2.png" alt="">
-                                    15 Ft²
-                                  </li>
-                                </ul><!--ppt-list end-->
-                                <p>Phasellus enim libero, blandit vel sapien ultricies magna et. </p>
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                              </div><!--room_info end-->
-                            </div><!--room-details end-->
-                          </div>
+
                         </div>
                       </div><!--tb-detaiils end-->
                     </div>
                       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="tb-detaiils">
+                        <div class="tb-detaiils"  *ngFor ="let room of rooms;">
                         <div class="tb-row">
                           <div class="room_details">
                             <div class="room-caroz">
                               <div class="room_img">
                                 <img src="https://via.placeholder.com/361x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
+                                <span class="price-tag">${{room.roomOnlyPrice}}<b>/night</b></span>
                               </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/361x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/361x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
+
                             </div><!--room-caroz end-->
                             <div class="room_info">
-                              <h3><a href="#" title="">Double Room 5</a></h3>
+                              <h3><a href="#" title="">{{room.name}}</a></h3>
                               <ul class="ppt-list">
                                 <li>
                                   <img src="assets/images/icy1.png" alt="">
-                                  1 GUESTS
+                                  {{room.maximumOccupancy}} GUESTS
                                 </li>
                                 <li>
                                   <img src="assets/images/icy2.png" alt="">
                                   15 Ft²
                                 </li>
                               </ul><!--ppt-list end-->
-                              <p>Make yourself comfortable in any of our serene guest rooms and spacious suites... </p>
+                              <p>{{room.description}} </p>
                               <div class="fct-dv">
                                 <ul class="fct-list">
                                   <li>
@@ -619,265 +323,11 @@
                             <div class="clearfix"></div>
                           </div><!--room-details end-->
                         </div><!--tb-row end-->
-                        <div class="tb-row">
-                          <div class="room_details">
-                            <div class="room-caroz">
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                            </div><!--room-caroz end-->
-                            <div class="room_info">
-                              <h3><a href="#" title="">Famıly Room 3</a></h3>
-                              <ul class="ppt-list">
-                                <li>
-                                  <img src="assets/images/icy1.png" alt="">
-                                  1 GUESTS
-                                </li>
-                                <li>
-                                  <img src="assets/images/icy2.png" alt="">
-                                  15 Ft²
-                                </li>
-                              </ul><!--ppt-list end-->
-                              <p>Make yourself comfortable in any of our serene guest rooms and spacious suites... </p>
-                              <div class="fct-dv">
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                                <div class="clearfix"></div>
-                              </div>
-                            </div><!--room_info end-->
-                            <div class="clearfix"></div>
-                          </div><!--room-details end-->
-                        </div><!--tb-row end-->
-                        <div class="tb-row">
-                          <div class="room_details">
-                            <div class="room-caroz">
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                            </div><!--room-caroz end-->
-                            <div class="room_info">
-                              <h3><a href="#" title="">Luxury Room 3</a></h3>
-                              <ul class="ppt-list">
-                                <li>
-                                  <img src="assets/images/icy1.png" alt="">
-                                  1 GUESTS
-                                </li>
-                                <li>
-                                  <img src="assets/images/icy2.png" alt="">
-                                  15 Ft²
-                                </li>
-                              </ul><!--ppt-list end-->
-                              <p>Make yourself comfortable in any of our serene guest rooms and spacious suites... </p>
-                              <div class="fct-dv">
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                                <div class="clearfix"></div>
-                              </div>
-                            </div><!--room_info end-->
-                            <div class="clearfix"></div>
-                          </div><!--room-details end-->
-                        </div><!--tb-row end-->
-                        <div class="tb-row">
-                          <div class="room_details">
-                            <div class="room-caroz">
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                            </div><!--room-caroz end-->
-                            <div class="room_info">
-                              <h3><a href="#" title="">Sıngle Room 3</a></h3>
-                              <ul class="ppt-list">
-                                <li>
-                                  <img src="assets/images/icy1.png" alt="">
-                                  1 GUESTS
-                                </li>
-                                <li>
-                                  <img src="assets/images/icy2.png" alt="">
-                                  15 Ft²
-                                </li>
-                              </ul><!--ppt-list end-->
-                              <p>Make yourself comfortable in any of our serene guest rooms and spacious suites... </p>
-                              <div class="fct-dv">
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                                <div class="clearfix"></div>
-                              </div>
-                            </div><!--room_info end-->
-                            <div class="clearfix"></div>
-                          </div><!--room-details end-->
-                        </div><!--tb-row end-->
-                        <div class="tb-row">
-                          <div class="room_details">
-                            <div class="room-caroz">
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                            </div><!--room-caroz end-->
-                            <div class="room_info">
-                              <h3><a href="#" title="">Twın Room 3</a></h3>
-                              <ul class="ppt-list">
-                                <li>
-                                  <img src="assets/images/icy1.png" alt="">
-                                  1 GUESTS
-                                </li>
-                                <li>
-                                  <img src="assets/images/icy2.png" alt="">
-                                  15 Ft²
-                                </li>
-                              </ul><!--ppt-list end-->
-                              <p>Make yourself comfortable in any of our serene guest rooms and spacious suites... </p>
-                              <div class="fct-dv">
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                                <div class="clearfix"></div>
-                              </div>
-                            </div><!--room_info end-->
-                            <div class="clearfix"></div>
-                          </div><!--room-details end-->
-                        </div><!--tb-row end-->
-                        <div class="tb-row">
-                          <div class="room_details">
-                            <div class="room-caroz">
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                              <div class="room_img">
-                                <img src="https://via.placeholder.com/250x250" alt="">
-                                <span class="price-tag">$165<b>/night</b></span>
-                              </div><!--room_img end-->
-                            </div><!--room-caroz end-->
-                            <div class="room_info">
-                              <h3><a href="#" title="">Famıly Room 2</a></h3>
-                              <ul class="ppt-list">
-                                <li>
-                                  <img src="assets/images/icy1.png" alt="">
-                                  1 GUESTS
-                                </li>
-                                <li>
-                                  <img src="assets/images/icy2.png" alt="">
-                                  15 Ft²
-                                </li>
-                              </ul><!--ppt-list end-->
-                              <p>Make yourself comfortable in any of our serene guest rooms and spacious suites... </p>
-                              <div class="fct-dv">
-                                <ul class="fct-list">
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Wifi"><img src="assets/images/ci1.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Plane"><img src="assets/images/ci2.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Car"><img src="assets/images/ci3.png" alt=""></span>
-                                  </li>
-                                  <li>
-                                    <span data-toggle="tooltip" data-placement="top" title="Breakfast"><img src="assets/images/ci4.png" alt=""></span>
-                                  </li>
-                                </ul><!--fct-list end-->
-                                <a href="#" title="" class="lnk-default">Book Now <i class="la la-arrow-right"></i></a>
-                                <div class="clearfix"></div>
-                              </div>
-                            </div><!--room_info end-->
-                            <div class="clearfix"></div>
-                          </div><!--room-details end-->
-                        </div><!--tb-row end-->
+
                       </div><!--tb-detaiils end-->
                       </div>
                   </div>
-                  <div class="lc-pagination">
+                 <!-- <div class="lc-pagination">
                     <nav>
                       <ul class="pagination">
                           <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -890,7 +340,7 @@
                           </li>
                         </ul>
                     </nav>
-                  </div><!--lc-pagination end-->
+                  </div>lc-pagination end-->
                 </div><!--main-dv end-->
               </div>
             </div>

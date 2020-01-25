@@ -13,7 +13,7 @@
         <h4>{{ property.mobile }}</h4>
       </div>
       <ul class="cont-list">
-        <li><img src="assets/images/icon9.png" alt="">A few clouds, 22 °C / 71 °F</li>
+        <!-- <li><img src="assets/images/icon9.png" alt="">A few clouds, 22 °C / 71 °F</li> -->
       </ul>
       <div class="clearfix"></div>
     </div><!--top_header end-->
@@ -24,10 +24,8 @@
 
           </li>
           <li><a routerLink="/rooms" title="">Rooms</a>
-            <ul>
-              <li><a routerLink="11_room_list_v1.html" title="">Room 1</a></li>
-              <li><a routerLink="12_room_list_v2.html" title="">Room 2</a></li>
-              <li><a routerLink="19_booking_list.html" title="">Booking List</a></li>
+            <ul  >
+              <li *ngFor ="let room of rooms;"><a routerLink="/rooms/details/{{ room.id}}" title="">{{ room.name}}</a></li>
             </ul>
           </li>
           <li><a routerLink="27_about.html" title="">About Us</a></li>
@@ -118,12 +116,11 @@
   </div><!--ct_head end-->
   <div class="navigations">
     <ul>
-      <li><a class="active" routerLink="#" title="">Home</a>
+      <li><a class="active" routerLink="/" title="">Home</a>
       </li>
-      <li><a routerLink="#" title="">Rooms</a>
-        <ul>
-          <li><a routerLink="11_room_list_v1.html" title="">Room Version 1</a></li>
-          <li><a routerLink="12_room_list_v2.html" title="">Room Version 2</a></li>
+      <li><a routerLink="/rooms" title="">Rooms</a>
+        <ul  >
+          <li *ngFor ="let room of rooms;"><a routerLink="/rooms/details/{{ room.id}}" title="">{{ room.name}}</a></li>
         </ul>
       </li>
       <li><a routerLink="27_about.html" title="">About Us</a></li>
@@ -137,14 +134,17 @@
       </li>
       <li><a routerLink="#" title="">News</a>
       </li>
-      <li><a routerLink="#" title="">Contact</a>
+      <li><a routerLink="/contact" title="">Contact</a>
 
       </li>
     </ul>
   </div><!--navigations end-->
   <ul class="mbl_contact_info">
-    <li>{{ property.mobile }}</li>
+    <li>{{ property.address.streetNumber }},
+      {{ property.address.streetName }},
+      {{ property.address.suburb }}, {{ property.address.city }},
+      {{ property.address.postcode }}</li>
     <li><a routerLink="contact" title="Contact">Map</a></li>
-    <li>{{ property.mobile }}</li>
+    <li>{{ property.email }}</li>
   </ul><!--mbl_contact_info end-->
 </div><!--responsive_mobile_menu end-->
