@@ -88,74 +88,40 @@
                     <table>
                       <tr>
                         <td>
-                          <h4>Name :</h4>
-                          <span>Ali</span>
+                          <h4>First Name :</h4>
+                          <span>{{  this.booking.firstName}}</span>
                         </td>
                         <td>
-                          <h4>Surname :</h4>
-                          <span>TUFAN</span>
+                          <h4>Last First :</h4>
+                          <span>{{   this.booking.lastName  }}</span>
                         </td>
-                        <td>
-                          <h4>Email :</h4>
-                          <span>info@gmail.com</span>
-                        </td>
+
                       </tr>
                       <tr>
                         <td>
                           <h4>Phone :</h4>
-                          <span>+90 589 658 96 32</span>
+                          <span>{{  this.booking.mobile }}</span>
                         </td>
                         <td>
-                          <h4>Address :</h4>
-                          <span>Lorem Ipsum Dolar </span>
+                          <h4>Email :</h4>
+                          <span>{{  this.booking.email }}</span>
                         </td>
-                        <td>
-                          <h4>City :</h4>
-                          <span>London</span>
-                        </td>
+
                       </tr>
-                      <tr>
-                        <td>
-                          <h4>Country :</h4>
-                          <span>England</span>
-                        </td>
-                        <td>
-                          <h4>ZIP :</h4>
-                          <span>85996</span>
-                        </td>
-                        <td>
-                          <h4>Arrival :</h4>
-                          <span>2:00 - 3:00 pm</span>
-                        </td>
-                      </tr>
+
                     </table>
-                    <div class="rq-info">
-                      <h4>Requests :</h4>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took </p>
-                    </div>
-                    <div class="rq-info cv-lst">
-                      <h4>Extra Services :</h4>
-                      <ul>
-                        <li>
-                          Car Rental
-                        </li>
-                        <li>
-                          Wifi
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="rq-info">
-                      <h4>Coupon :</h4>
-                      <p>Not set</p>
-                    </div>
+
                     <div class="rq-info cv_lst">
-                      <h4>Tax :</h4>
+                      <h4>Room Information :</h4>
                       <ul>
                         <li>
-                          Included 21 $ City Tax
+                           <b>Room Name : </b> {{room.name}}
                         </li>
                         <li>
-                          Included 22 % VAT
+                          <b>No of rooms : </b> {{room.noOfRooms}}
+                        </li>
+                        <li>
+                          <b>No of guest : </b> {{room.noOfPersons}}
                         </li>
                       </ul>
                     </div>
@@ -175,18 +141,27 @@
                     <div class="tab-content" id="myTabContent3">
                       <div class="tab-pane fade show active" id="credit-card" role="tabpanel" aria-labelledby="credit-tab">
                         <div class="payment-tab">
-                            <form>
+                          <form [formGroup]="onPaymentForm">
                               <div class="row">
                                 <div class="col-lg-6">
                                   <div class="form-field">
                                     <label>Cardholder name</label>
-                                    <input type="text" name="c-name" placeholder="Ali TUF...">
+                                    <input type="text" name="c-name"
+                                    [formControl]="cardHolderName"
+                                    placeholder="Name On Card"
+                                    [(ngModel)]="payment.cardHolderName">
                                   </div><!--form-field end-->
                                 </div>
                                 <div class="col-lg-6">
                                   <div class="form-field">
                                     <label>Card number</label>
-                                    <input type="text" name="c-name" placeholder="0436">
+                                    <input type="text" name="c-name"
+                                    placeholder="Card Number"
+                                    minlength="16"
+                                    maxlength="16"
+                                    pattern="[0-9]{16}"
+                                    [formControl]="cardNumber"
+                                    [(ngModel)]="payment.cardNumber">
                                   </div><!--form-field end-->
                                 </div>
                                 <div class="col-lg-6">
@@ -195,12 +170,33 @@
                                     <div class="row">
                                       <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="form-field">
-                                          <input type="text" name="exp-date" placeholder="MM">
+
+                                          <mat-select
+                                              placeholder="Expiration Month"
+                                              [(ngModel)]="payment.expMonth"
+                                              [formControl]="expMonth"
+                                            >
+                                              <mat-option *ngFor="let month of months" [value]="month.value">
+                                                {{ month.viewValue }}
+                                              </mat-option>
+                                            </mat-select>
+
                                         </div><!--form-field end-->
                                       </div>
                                       <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="form-field">
-                                          <input type="text" name="exp-date" placeholder="YY">
+
+                                          <mat-select
+                                          placeholder="Expiration Year"
+                                          [(ngModel)]="payment.expYear"
+                                          [formControl]="expYear"
+                                          required
+                                        >
+                                          <mat-option *ngFor="let year of years" [value]="year.value">
+                                            {{ year.viewValue }}
+                                          </mat-option>
+                                        </mat-select>
+
                                         </div><!--form-field end-->
                                       </div>
                                     </div>
@@ -209,7 +205,17 @@
                                 <div class="col-lg-6">
                                   <div class="form-field">
                                     <label>CVV </label>
-                                    <input type="text" name="c-name" placeholder="0436">
+                                    <input
+                                    type="text"
+                                    minlength="3"
+                                    maxlength="3"
+                                    matInput
+                                    placeholder="CVV"
+                                    [formControl]="cvv"
+                                    pattern="[0-9]{3}"
+                                    [(ngModel)]="payment.cvv"
+                                    required
+                                  />
                                   </div><!--form-field end-->
                                 </div>
                                 <div class="col-lg-12">
@@ -256,7 +262,7 @@
                                   <p><span>Please note</span> you will be able to review your ride on the next page before confirming your reservation. Your card will not be charged until after your ride.</p>
                                 </div>
                                 <div class="col-lg-12">
-                                  <button type="submit" class="lnk-default">Submit Payment <i class="la la-arrow-right"></i></button>
+                                  <button type="submit" (click)="submitPayment()" class="lnk-default">Submit Payment <i class="la la-arrow-right"></i></button>
                                 </div>
                               </div>
                             </form>
@@ -305,7 +311,7 @@
                                   <p><span>Please note</span> you will be able to review your ride on the next page before confirming your reservation. Your card will not be charged until after your ride.</p>
                                 </div>
                                 <div class="col-lg-12">
-                                  <button type="submit" class="lnk-default">Submit Payment <i class="la la-arrow-right"></i></button>
+                                  <button type="submit"  [disabled]="!onPaymentForm.valid" class="lnk-default">Submit Payment <i class="la la-arrow-right"></i></button>
                                 </div>
                               </div>
                             </form>

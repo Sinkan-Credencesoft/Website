@@ -7,6 +7,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { NewBookingComponent } from './new-booking/new-booking.component';
 import { ChooseRoomComponent } from './choose-room/choose-room.component';
 import { CompleteComponent } from './complete/complete.component';
+import {MatSelectModule} from '@angular/material/select';
 const routes: Routes = [
   { path: '', component: BookingComponent},
   { path: 'booking/choose', component: ChooseRoomComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
