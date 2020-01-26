@@ -70,7 +70,7 @@ export class ChooseRoomComponent implements OnInit {
   {
     this.apiService.getRoomDetailsByPropertyId(PROPERTY_ID).subscribe(response => {
 
-      console.log('response room ' + JSON.stringify(response.body));
+      //console.log('response room ' + JSON.stringify(response.body));
       this.rooms = response.body;
     },
       error => {
@@ -84,7 +84,7 @@ export class ChooseRoomComponent implements OnInit {
 getRoomByDate() {
   this.apiService.getRoomDetailsByPropertyIdAndDate(PROPERTY_ID, this.fromDate, this.toDate) .subscribe(response => {
 
-    console.log('response room ' + JSON.stringify(response.body));
+    //console.log('response room ' + JSON.stringify(response.body));
     this.rooms = response.body;
   },
     error => {

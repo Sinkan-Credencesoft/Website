@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Room } from 'src/app/room/room';
 import { PROPERTY_ID, ApiService } from 'src/app/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from "@angular/router";
+import { DateModel } from './../home/model/dateModel';
 
 @Component({
   selector: 'app-booking',
@@ -9,9 +11,13 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent implements OnInit {
+
   rooms: Room[];
-  toDate: string;
-  constructor(private apiService: ApiService) { }
+  dateModel : DateModel;
+
+  daySelected : string;
+  yearSelected : string;
+  monthSelected : number;
 
 
   currentDay : string;
@@ -23,14 +29,34 @@ export class BookingComponent implements OnInit {
   year2 : string;
   month2: number;
 
-  fromDate : string;
-
   monthArray =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
+  constructor(private apiService: ApiService,
+    private acRoute : ActivatedRoute,)
+  {
+    this.dateModel = new DateModel();
+  }
 
  ngOnInit() {
     this.checkincheckoutDate();
     this.getRoom();
+
+    this.acRoute.queryParams.subscribe(params => {
+
+      if(params["dateob"] != undefined)
+      {
+          this.dateModel = JSON.parse(params["dateob"]);
+
+          console.log('this.dateModel '+JSON.stringify(this.dateModel));
+
+          this.getRoomByDate( this.dateModel.checkedin  ,this.dateModel.checkout  );
+
+         // this.getCheckInDateFormat(this.dateModel.checkedin);
+
+      }
+
+    });
+
   }
   checkincheckoutDate()
   {
@@ -70,7 +96,7 @@ export class BookingComponent implements OnInit {
   {
     this.apiService.getRoomDetailsByPropertyId(PROPERTY_ID).subscribe(response => {
 
-      console.log('response room ' + JSON.stringify(response.body));
+     // console.log('response room ' + JSON.stringify(response.body));
       this.rooms = response.body;
     },
       error => {
@@ -81,10 +107,10 @@ export class BookingComponent implements OnInit {
   );
   }
 
-getRoomByDate() {
-  this.apiService.getRoomDetailsByPropertyIdAndDate(PROPERTY_ID, this.fromDate, this.toDate) .subscribe(response => {
+getRoomByDate( fromDate : string ,toDate : string ) {
+  this.apiService.getRoomDetailsByPropertyIdAndDate(PROPERTY_ID, fromDate, toDate) .subscribe(response => {
 
-    console.log('response room ' + JSON.stringify(response.body));
+    console.log('getRoomByDate ' + JSON.stringify(response.body));
     this.rooms = response.body;
   },
     error => {
@@ -94,4 +120,16 @@ getRoomByDate() {
     }
 );
 }
+
+// getCheckInDateFormat(dateString:string)
+// {
+//   var yearAndMonth = dateString.split("-", 3);
+//   this.daySelected = String(yearAndMonth[2].split(" ", 1));
+//    this.yearSelected = yearAndMonth[1];
+//    this.monthSelected +'-'+yearAndMonth[1];
+
+//    console.log(this.daySelected +'-'+this.monthSelected +'-'+  this.yearSelected );
+// }
+
+
 }

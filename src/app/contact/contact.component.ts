@@ -25,7 +25,7 @@ export class ContactComponent implements OnInit {
   getProperty() {
     this.apiService.getPropertyDetailsByPropertyId(PROPERTY_ID).subscribe(response => {
 
-      console.log('response room ' + JSON.stringify(response.body));
+     // console.log('response room ' + JSON.stringify(response.body));
       this.property = response.body;
     },
       error => {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormControl, FormGroup, NgForm, FormGroupDirective, Validators } from '@angular/forms';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
+import { DateModel } from '../model/dateModel';
 
 @Component({
   selector: 'app-slider',
@@ -20,6 +21,10 @@ export class SliderComponent implements OnInit {
   month2: number;
 
   fromDate : string;
+  dateModel : DateModel;
+
+  checkedin: FormControl = new FormControl();
+  checkedout: FormControl = new FormControl();
 
   monthArray =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   constructor(private router : Router) { }
@@ -27,9 +32,7 @@ export class SliderComponent implements OnInit {
 
   ngOnInit()
   {
-
     this.checkincheckoutDate();
-
   }
 
   checkincheckoutDate()
@@ -65,23 +68,40 @@ export class SliderComponent implements OnInit {
 
   onBook()
   {
+    this.dateModel = new DateModel();
 
-    console.log('current day  : '+ this.fromDate);
-    // this.bookingURLOB = new Booking();
-    // this.bookingURLOB.businessEmail = this.host.businessEmail;
-    // this.bookingURLOB.businessName = this.host.businessName;
-    // this.bookingURLOB.mobile = this.host.mobile;
-    // this.bookingURLOB.roomBooking = true;
-    // this.bookingURLOB.roomId = room.roomId,
-    // this.bookingURLOB.noOfRooms = 1;
+    if(this.checkedin.value === null)
+    {
+      this.dateModel.checkedin = this.year+'-'+this.month+1+'-'+this.day;
+    }
+    else
+    {
+      this.dateModel.checkedin = this.getDateFormat(this.checkedin.value);
+    }
 
-    // let navigationExtras: NavigationExtras = {
-    //   queryParams: {
-    //       bookingOb: JSON.stringify(this.bookingURLOB),
-    //   }
-    // };
+    if(this.checkedout.value === null)
+    {
+      this.dateModel.checkout =  this.year2+'-'+this.month2+1+'-'+this.day2;
+    }
+    else
+    {
+      this.dateModel.checkout = this.getDateFormat(this.checkedout.value);
+    }
 
-    this.router.navigate(['/booking'] );
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          dateob: JSON.stringify(this.dateModel),
+      }
+    };
+
+    this.router.navigate(['/booking'],navigationExtras );
+  }
+
+  getDateFormat(dateString:string)
+  {
+    var yearAndMonth = dateString.split("-", 3);
+    return yearAndMonth[0]+'-'+yearAndMonth[1]+'-'+ yearAndMonth[2].split(" ", 1);
   }
 
 }

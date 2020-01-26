@@ -213,10 +213,7 @@
                     </li>
                 </ul>
             </div>
-        </div><!--Revolution Slider end-->
-
-
-
+        </div>
 
         <div class="checking-form sldr">
           <div class="container">
@@ -224,6 +221,7 @@
           <li>
             <div class="check-form">
               <h4>CHECK-IN</h4>
+
               <div class="det">
                 <b class="val-date">{{ this.day }}</b>
                 <span>
@@ -231,7 +229,8 @@
                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                 </span>
               </div>
-              <input type="text" name="dateIn" class="date-pick">
+              <input type="text" [formControl]="checkedin" name="dateIn"  class="date-pick" >
+
               <div class="clearfix"></div>
             </div><!--check-form end-->
           </li>
@@ -245,8 +244,8 @@
                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                 </span>
               </div>
-              <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
-              <input type="text" name="dateOut" class="date-pick">
+              <!-- <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a> -->
+              <input type="text" name="dateOut" [formControl]="checkedout" class="date-pick">
               <div class="clearfix"></div>
             </div><!--check-form end-->
           </li>
@@ -270,7 +269,7 @@
             <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
           </li>
           <li class="bkk">
-            <div class="bk_now" routerLink="/booking">
+            <div class="bk_now"  (click)="onBook()">
               <!-- routerLink="/booking" (click)="onBook()" -->
               <a  title="" ><img src="assets/images/icon6.png" alt=""></a>
               <a  title=""  class="bk-now">Book Now</a>
@@ -282,3 +281,4 @@
     </div>
     </div>
 </section><!--MAIN-SLIDER END-->
+

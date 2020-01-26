@@ -7,6 +7,7 @@ import { BlogComponent } from './blog/blog.component';
 import { ServiceComponent } from './service/service.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { RoomComponent } from './room/room.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -23,6 +24,8 @@ const routes: Routes = [
     RoomComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RouterModule.forRoot(routes)
   ],
