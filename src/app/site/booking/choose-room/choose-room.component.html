@@ -31,9 +31,9 @@
                             <div class="check-form">
                               <h4>CHECK-IN</h4>
                               <div class="det">
-                                <b class="val-date">{{ this.day }}</b>
+                                <b class="val-date">{{ this.daySelected }}</b>
                                 <span>
-                                  <i class="month">{{monthArray[month] }}</i> <i class="year">{{  this.year  }}</i>
+                                  <i class="month">{{monthArray[monthSelected] }}</i> <i class="year"> {{  this.yearSelected  }}</i>
                                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                                 </span>
                               </div>
@@ -45,9 +45,9 @@
                             <div class="check-form">
                               <h4>CHECK-OUt</h4>
                               <div class="det">
-                                <b class="val-date">{{ this.day2 }}</b>
+                                <b class="val-date">{{ this.daySelected2 }}</b>
                                 <span>
-                                  <i class="month">{{ monthArray[month2] }}</i> <i class="year">{{  this.year2  }}</i>
+                                  <i class="month">{{ monthArray[monthSelected2] }}</i> <i class="year">{{  this.yearSelected2  }}</i>
                                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                                 </span>
                               </div>
@@ -221,7 +221,8 @@
                                 <h4>FROM ${{room.roomOnlyPrice}}</h4>
                                 <h3>{{room.name}}</h3>
                               </div>
-                              <a routerLink="/booking/booking" title="" class="booking-btn">BOOK NOW <i class="la la-arrow-right"></i></a>
+                              <!-- routerLink="/booking/booking" -->
+                              <a  title="" (click)="onRoomBooking(room)" class="booking-btn">BOOK NOW <i class="la la-arrow-right"></i></a>
                             </div><!--room-details end-->
                           </div>
 

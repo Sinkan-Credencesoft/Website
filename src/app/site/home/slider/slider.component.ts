@@ -95,7 +95,7 @@ export class SliderComponent implements OnInit {
       }
     };
 
-    this.router.navigate(['/booking'],navigationExtras );
+    this.router.navigate(['/booking/choose'],navigationExtras );
   }
 
   getDateFormat(dateString:string)

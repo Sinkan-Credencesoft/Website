@@ -51,7 +51,7 @@ export class BookingComponent implements OnInit {
 
           this.getRoomByDate( this.dateModel.checkedin  ,this.dateModel.checkout  );
 
-         // this.getCheckInDateFormat(this.dateModel.checkedin);
+          this.getCheckInDateFormat(this.dateModel.checkedin);
 
       }
 
@@ -121,15 +121,15 @@ getRoomByDate( fromDate : string ,toDate : string ) {
 );
 }
 
-// getCheckInDateFormat(dateString:string)
-// {
-//   var yearAndMonth = dateString.split("-", 3);
-//   this.daySelected = String(yearAndMonth[2].split(" ", 1));
-//    this.yearSelected = yearAndMonth[1];
-//    this.monthSelected +'-'+yearAndMonth[1];
+  getCheckInDateFormat(dateString:string)
+  {
+    var yearAndMonth = dateString.split("-", 3);
+    this.daySelected = String(yearAndMonth[2].split(" ", 1));
+    this.yearSelected = yearAndMonth[0];
+    this.monthSelected = parseInt(yearAndMonth[1])-1;
 
-//    console.log(this.daySelected +'-'+this.monthSelected +'-'+  this.yearSelected );
-// }
+    console.log('final '+this.daySelected +'-'+this.monthSelected +'-'+  this.yearSelected );
+  }
 
 
 }
