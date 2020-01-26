@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-lg-8">
                   <div class="booking_form">
-                    <span class="guest-notif">You are booking for property.name's room.roomType. </span>
+                    <span class="guest-notif">You are booking for property.name's {{ this.room.name }}. </span>
                     <!--<div class="services_select">
                     <div class="seachby">
                       <h3>Add Extra Servıces</h3>
@@ -141,42 +141,65 @@
                   </div>services_select end-->
                   <div class="information_form">
                     <h3>Add Booking Informatıons</h3>
-                    <form>
+                    <form [formGroup]="onBookingForm">
                       <div class="row">
                         <div class="col-lg-6">
                           <div class="form-field">
                             <label>First Name</label>
-                            <input type="text" name="firstName" placeholder="">
+                            <input type="text"
+                              name="firstName"
+                              [formControl]="firstName"
+                              [(ngModel)]="booking.firstName"
+                             placeholder="">
                           </div><!--form-field end-->
                         </div>
                         <div class="col-lg-6">
                           <div class="form-field">
                             <label>Last Name</label>
-                            <input type="text" name="lastName" placeholder="">
+                            <input type="text"
+                            name="lastName"
+                            placeholder=""
+                            [formControl]="lastName"
+                            [(ngModel)]="booking.lastName">
                           </div><!--form-field end-->
                         </div>
                         <div class="col-lg-6">
                           <div class="form-field">
                             <label>Email *</label>
-                            <input type="email" name="email" placeholder="">
+                            <input type="email"
+                            name="email"
+                            [formControl]="bookingEmail"
+                            [(ngModel)]="booking.email"
+                            placeholder="">
                           </div><!--form-field end-->
                         </div>
                         <div class="col-lg-6">
                           <div class="form-field">
                             <label>Phone Number *</label>
-                            <input type="text" name="mobile" placeholder="">
+                            <input type="text" name="mobile" placeholder=""
+                            [formControl]="bookingContact"
+                            [(ngModel)]="booking.mobile">
                           </div><!--form-field end-->
                         </div>
                         <div class="col-lg-6">
                           <div class="form-field">
                             <label>Number of Room</label>
-                            <input type="number" name="noOfRoom" placeholder="">
+                            <input type="number" name="noOfRoom" placeholder="" [formControl]="noOfRooms"
+                            [(ngModel)] ="booking.noOfRooms"
+                            (ngModelChange)="onChangeRoom($event,room.noOfRooms)"
+                            min="1"
+                            max="{{ room.noOfRooms }}">
                           </div><!--form-field end-->
                         </div>
                         <div class="col-lg-6">
                           <div class="form-field">
                             <label>Number of Guest</label>
-                            <input type="number" name="noOfGuest" placeholder="">
+                            <input type="number" name="noOfGuest" placeholder=""
+                            [formControl]="noOfPersons"
+                            (ngModelChange)="onChangePerson($event,room.maximumOccupancy*booking.noOfRooms)"
+                            [(ngModel)]="booking.noOfPersons"
+                            min="1"
+                            max="{{ room.maximumOccupancy*booking.noOfRooms }}">
                           </div><!--form-field end-->
                         </div>
 
@@ -185,8 +208,8 @@
                             <ul>
                               <li>
                                 <div class="inp-field">
-                                  <input type="checkbox" name="cc8" id="c87">
-                                  <label for="c87"><span></span><b>Terms and conditions *</b></label>
+                                  <!-- <input type="checkbox" [formControl]="termAndConditions" name="cc8" id="c87">
+                                  <label for="c87"><span></span><b>Terms and conditions *</b></label> -->
                                 </div>
                               </li>
                             </ul>
@@ -195,7 +218,14 @@
                         </div>
                         <div class="col-lg-12">
                           <div class="form-submit">
-                            <button type="submit" class="lnk-default">Checkout <i class="la la-arrow-right"></i></button>
+                            <button mat-raised-button
+                                [disabled]="!onBookingForm.valid"
+                                (click)="onCheckOut()"
+                                class="lnk-default"
+                                color="primary">
+                                Checkout <i class="la la-arrow-right"></i>
+                                </button>
+                            <!-- <button type="submit" [disabled]="!onBookingForm.valid" class="lnk-default">Checkout <i class="la la-arrow-right"></i></button> -->
                           </div><!--form-submit end-->
                         </div>
                       </div>

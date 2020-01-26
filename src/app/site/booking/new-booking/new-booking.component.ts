@@ -7,7 +7,7 @@ import { DateModel } from './../../home/model/dateModel';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { Booking } from '../../../booking/booking';
-import { FormControl, FormGroup, NgForm, FormGroupDirective, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, FormGroupDirective, Validators,FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-new-booking',
@@ -34,13 +34,33 @@ export class NewBookingComponent implements OnInit {
 
   monthArray =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
+  firstName: FormControl = new FormControl("",Validators.required);
+  lastName: FormControl = new FormControl("",Validators.required);
+  bookingEmail: FormControl = new FormControl("",Validators.required);
+  bookingContact: FormControl = new FormControl("",Validators.required);
+  noOfPersons: FormControl = new FormControl("",Validators.required);
+  noOfRooms: FormControl = new FormControl("",Validators.required);
+  //termAndConditions : FormControl = new FormControl("",Validators.required);
+
+  onBookingForm: FormGroup = new FormGroup({
+    firstName: this.firstName,
+    lastName: this.lastName,
+    bookingEmail: this.bookingEmail,
+    bookingContact : this.bookingContact,
+    noOfPersons: this.noOfPersons,
+    noOfRooms: this.noOfRooms,
+   // termAndConditions : this.termAndConditions,
+  });
+
   constructor(private apiService: ApiService,
     private router : Router,
+    private formBuilder: FormBuilder,
     private acRoute : ActivatedRoute,)
   {
     this.dateModel = new DateModel();
     this.booking = new Booking();
     this.room = new Room();
+
   }
 
  ngOnInit()
@@ -51,6 +71,7 @@ export class NewBookingComponent implements OnInit {
     {
         this.dateModel = JSON.parse(params["dateob"]);
 
+        this.room = this.dateModel.room;
         console.log('this.dateModel '+JSON.stringify(this.dateModel));
 
         this.getCheckInDateFormat(this.dateModel.checkedin);
@@ -58,6 +79,52 @@ export class NewBookingComponent implements OnInit {
     }
 
   });
+ }
+
+ onChangeRoom($event, roomNumber : number)
+ {
+
+   if(this.booking.noOfRooms != undefined)
+   {
+
+     if(this.booking.noOfRooms > roomNumber)
+     {
+
+       this.booking.noOfRooms = roomNumber;
+       // this.noOfRooms.reset();
+       this.noOfRooms.setValue(roomNumber);
+       console.log(this.booking.noOfRooms+'on room change : '+roomNumber);
+     }
+   }
+ }
+
+ onChangePerson($event, personNumber : number)
+ {
+
+   if(this.booking.noOfPersons != undefined)
+   {
+     if(this.booking.noOfPersons > personNumber)
+     {
+
+       this.booking.noOfPersons = personNumber;
+       this.noOfPersons.setValue(personNumber);
+     }
+   }
+ }
+
+ onCheckOut()
+ {
+    console.log('this.booking: '+JSON.stringify(this.booking));
+
+    this.dateModel.booking = this.booking;
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          dateob: JSON.stringify(this.dateModel),
+      }
+    };
+    this.router.navigate(['/booking/payment'],navigationExtras );
+
  }
 
  getCheckInDateFormat(dateString:string)
