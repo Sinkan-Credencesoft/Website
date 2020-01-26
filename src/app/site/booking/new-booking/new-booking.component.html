@@ -29,9 +29,9 @@
                             <div class="check-form">
                               <h4>CHECK-IN</h4>
                               <div class="det">
-                                <b class="val-date">{{ this.day }}</b>
+                                <b class="val-date">{{ this.daySelected }}</b>
                                 <span>
-                                  <i class="month">{{monthArray[month] }}</i> <i class="year">{{  this.year  }}</i>
+                                  <i class="month">{{monthArray[monthSelected] }}</i> <i class="year"> {{  this.yearSelected  }}</i>
                                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                                 </span>
                               </div>
@@ -43,9 +43,9 @@
                             <div class="check-form">
                               <h4>CHECK-OUt</h4>
                               <div class="det">
-                                <b class="val-date">{{ this.day2 }}</b>
+                                <b class="val-date">{{ this.daySelected2 }}</b>
                                 <span>
-                                  <i class="month">{{monthArray[month2] }}</i> <i class="year">{{  this.year2  }}</i>
+                                  <i class="month">{{monthArray[monthSelected2] }}</i> <i class="year"> {{  this.yearSelected2  }}</i>
                                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                                 </span>
                               </div>
@@ -72,9 +72,9 @@
                             </div><!--check-form end-->
                             <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                           </li>
-                          <li class="check-avail">
+                          <!-- <li class="check-avail">
                             <a (click)="getRoomByDate()" title="" class="check-status">CHECK AVAILABILITY</a>
-                          </li>
+                          </li> -->
                         </ul>
                         <div class="clearfix"></div>
                       </div>
@@ -95,52 +95,9 @@
                 <div class="col-lg-8">
                   <div class="booking_form">
                     <span class="guest-notif">You are booking as guest, <a href="#" title="">LOGIN</a> or <a href="#" title="">REGISTER</a> if you want to save your reservation on your account.</span>
-                    <!--<div class="services_select">
-                    <div class="seachby">
-                      <h3>Add Extra Servıces</h3>
-                      <ul>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_11" >
-                            <label for="c_11"><span></span><b>Wifi : 100 $ ( Room / Night ) = 700 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_12">
-                            <label for="c_12"><span></span><b>Sea View : 10 $ ( Room / Night ) = 200 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_13">
-                            <label for="c_13"><span></span><b>Car Rental : 30 $ ( Room / Night ) = 200 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_14">
-                            <label for="c_14"><span></span><b>Laundry : 10 $ ( Guest / Night ) = 400 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_15">
-                            <label for="c_15"><span></span><b>Satellite TV : 50 $ ( Room / Trip ) = 250 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_16">
-                            <label for="c_16"><span></span><b>Breakfast : 10 $ ( Guest / Night ) = 150 $</b></label>
-                          </div>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>services_select end-->
+
                   <div class="information_form">
-                    <h3>Add Your Informatıons</h3>
+                    <h3>Add Booking Informatıons</h3>
                     <form>
                       <div class="row">
                         <div class="col-lg-6">
@@ -176,26 +133,14 @@
                         <div class="col-lg-6">
                           <div class="form-field">
                             <label>Country</label>
-                            <div class="custom-select">
-                              <select>
-                                  <option value="0">England</option>
-                                  <option value="1">USA</option>
-                                  <option value="2">China</option>
-                                  <option value="3">Russia</option>
-                                  <option value="4">Australia</option>
-                              </select>
-                            </div>
+                            <input type="text" name="country" placeholder="">
                           </div><!--form-field end-->
                         </div>
                         <div class="col-lg-6">
                           <div class="form-field">
                             <label>City</label>
                             <div class="custom-select">
-                              <select>
-                                  <option value="0">London</option>
-                                  <option value="1">Cardiff</option>
-                                  <option value="2">Surrey</option>
-                              </select>
+                              <input type="text" name="city" placeholder="">
                             </div>
                           </div><!--form-field end-->
                         </div>
