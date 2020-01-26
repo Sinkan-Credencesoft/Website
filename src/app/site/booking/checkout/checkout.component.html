@@ -29,9 +29,9 @@
                             <div class="check-form">
                               <h4>CHECK-IN</h4>
                               <div class="det">
-                                <b class="val-date">{{ this.day }}</b>
+                                <b class="val-date">{{ this.daySelected }}</b>
                                 <span>
-                                  <i class="month">{{monthArray[month] }}</i> <i class="year">{{  this.year  }}</i>
+                                  <i class="month">{{monthArray[monthSelected] }}</i> <i class="year">{{  this.yearSelected2  }}</i>
                                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                                 </span>
                               </div>
@@ -43,9 +43,9 @@
                             <div class="check-form">
                               <h4>CHECK-OUt</h4>
                               <div class="det">
-                                <b class="val-date">{{ this.day2 }}</b>
+                                <b class="val-date">{{ this.daySelected2 }}</b>
                                 <span>
-                                  <i class="month">{{monthArray[month2] }}</i> <i class="year">{{  this.year2  }}</i>
+                                  <i class="month">{{monthArray[monthSelected2] }}</i> <i class="year">{{  this.yearSelected2  }}</i>
                                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                                 </span>
                               </div>
@@ -72,9 +72,9 @@
                             </div><!--check-form end-->
                             <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                           </li>
-                          <li class="check-avail">
+                          <!-- <li class="check-avail">
                             <a (click)="getRoomByDate()" title="" class="check-status">CHECK AVAILABILITY</a>
-                          </li>
+                          </li> -->
                         </ul>
                         <div class="clearfix"></div>
                       </div>
