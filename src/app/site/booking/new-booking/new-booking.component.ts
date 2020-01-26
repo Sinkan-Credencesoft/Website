@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Room } from 'src/app/room/room';
-import { ApiService, PROPERTY_ID } from 'src/app/api.service';
+import { PROPERTY_ID, ApiService } from 'src/app/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from "@angular/router";
+import { DateModel } from './../../home/model/dateModel';
+import { NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
+import { Booking } from '../../../booking/booking';
+import { FormControl, FormGroup, NgForm, FormGroupDirective, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-booking',
@@ -11,69 +17,61 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class NewBookingComponent implements OnInit {
 
   rooms: Room[];
-  toDate: string;
-  constructor(private apiService: ApiService) { }
+  dateModel : DateModel;
+  booking : Booking;
+
+  daySelected : string;
+  yearSelected : string;
+  monthSelected : number;
+
+  daySelected2 : string;
+  yearSelected2 : string;
+  monthSelected2 : number;
 
 
   currentDay : string;
-  day : string;
-  year : string;
-  month : number;
-
-  day2 : string;
-  year2 : string;
-  month2: number;
-
-  fromDate : string;
 
   monthArray =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-
- ngOnInit() {
-    this.checkincheckoutDate();
-  }
-  checkincheckoutDate()
+  constructor(private apiService: ApiService,
+    private router : Router,
+    private acRoute : ActivatedRoute,)
   {
-    let currentDate: Date = new Date();
-    this.day = this.getDay(currentDate);
-    this.year = String(currentDate.getFullYear());
-    this.month = currentDate.getMonth();
-
-
-    let afterDate: Date = new Date();
-    afterDate.setDate(currentDate.getDate()+1);
-
-    this.day2 = this.getDay(afterDate);
-    this.year2 = String(afterDate.getFullYear());
-    this.month2 = afterDate.getMonth();
+    this.dateModel = new DateModel();
+    this.booking = new Booking();
   }
 
+ ngOnInit()
+ {
+  this.acRoute.queryParams.subscribe(params => {
 
-  getDay(date:Date)
-  {
-    if(date.getDate().toString().length==1)
+    if(params["dateob"] != undefined)
     {
-        this.currentDay = '0'+date.getDate();
+        this.dateModel = JSON.parse(params["dateob"]);
+
+        console.log('this.dateModel '+JSON.stringify(this.dateModel));
+
+        this.getCheckInDateFormat(this.dateModel.checkedin);
+        this.getCheckOutDateFormat(this.dateModel.checkout);
     }
-    else
-    {
-        this.currentDay = ''+date.getDate();
-    }
 
-    return this.currentDay;
-  }
+  });
+ }
 
-getRoomByDate() {
-  this.apiService.getRoomDetailsByPropertyIdAndDate(PROPERTY_ID, this.fromDate, this.toDate) .subscribe(response => {
+ getCheckInDateFormat(dateString:string)
+ {
+   var yearAndMonth = dateString.split("-", 3);
+   this.daySelected = String(yearAndMonth[2].split(" ", 1));
+   this.yearSelected = yearAndMonth[0];
+   this.monthSelected = parseInt(yearAndMonth[1])-1;
+ }
 
-   // console.log('response room ' + JSON.stringify(response.body));
-    this.rooms = response.body;
-  },
-    error => {
-      if (error instanceof HttpErrorResponse) {
+ getCheckOutDateFormat(dateString:string)
+ {
+   var yearAndMonth = dateString.split("-", 3);
+   this.daySelected2 = String(yearAndMonth[2].split(" ", 1));
+   this.yearSelected2 = yearAndMonth[0];
+   this.monthSelected2 = parseInt(yearAndMonth[1])-1;
+ }
 
-      }
-    }
-);
-}
 }
