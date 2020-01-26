@@ -63,14 +63,13 @@ export class ChooseRoomComponent implements OnInit {
   onRoomBooking(room)
   {
 
-    this.dateModel.roomId = room.id;
+    this.dateModel.room = room;
 
     let navigationExtras: NavigationExtras = {
       queryParams: {
           dateob: JSON.stringify(this.dateModel),
       }
     };
-
     this.router.navigate(['/booking/booking'],navigationExtras );
   }
 

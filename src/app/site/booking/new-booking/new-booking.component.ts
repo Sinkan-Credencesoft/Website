@@ -17,6 +17,7 @@ import { FormControl, FormGroup, NgForm, FormGroupDirective, Validators } from '
 export class NewBookingComponent implements OnInit {
 
   rooms: Room[];
+  room: Room;
   dateModel : DateModel;
   booking : Booking;
 
@@ -39,6 +40,7 @@ export class NewBookingComponent implements OnInit {
   {
     this.dateModel = new DateModel();
     this.booking = new Booking();
+    this.room = new Room();
   }
 
  ngOnInit()
