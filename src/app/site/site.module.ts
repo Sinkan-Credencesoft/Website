@@ -11,6 +11,7 @@ import { BookComponent } from '../book/book.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { BookingModule } from './booking/booking.module';
 import { BookingComponent } from './booking/booking.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: '', component: HomeModule},
@@ -20,6 +21,7 @@ const routes: Routes = [
 
   { path: 'book', component: BookComponent},
   { path: 'gallery', component: GalleryComponent},
+  { path: 'about', component: AboutComponent},
   { path: 'policy', component: PolicyComponent},
 
   // { path: 'booking', loadChildren: './booking/booking.component#BookingModule'},
