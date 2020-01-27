@@ -8,7 +8,7 @@ import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { Booking } from '../../../booking/booking';
 import { FormControl, FormGroup, NgForm, FormGroupDirective, Validators,FormBuilder } from '@angular/forms';
-
+import { Payment } from './../../../payment/payment';
 
 @Component({
   selector: 'app-complete',
@@ -19,6 +19,7 @@ export class CompleteComponent implements OnInit {
 
   rooms: Room[];
   room: Room;
+  payment : Payment;
   dateModel : DateModel;
   booking : Booking;
 
@@ -43,7 +44,7 @@ export class CompleteComponent implements OnInit {
     this.dateModel = new DateModel();
     this.booking = new Booking();
     this.room = new Room();
-
+    this.payment = new Payment();
   }
 
  ngOnInit()
@@ -55,7 +56,8 @@ export class CompleteComponent implements OnInit {
         this.dateModel = JSON.parse(params["dateob"]);
 
         this.room = this.dateModel.room;
-        console.log('this.dateModel '+JSON.stringify(this.dateModel));
+        this.booking = this.dateModel.booking;
+        this.payment = this.dateModel.payment;
 
         this.getCheckInDateFormat(this.dateModel.checkedin);
         this.getCheckOutDateFormat(this.dateModel.checkout);

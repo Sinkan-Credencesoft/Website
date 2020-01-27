@@ -85,26 +85,26 @@
                 <div class="col-lg-8">
                   <div class="more_information_sec">
                     <h3>Your Order Detaıls</h3>
-                    <h4>Order Transaction <span>896536598</span></h4>
+                    <h4>Order Transaction <span>{{ payment.referenceNumber  }}</span></h4>
                     <table>
                       <tr>
                         <td>
                           <h4>First Name :</h4>
-                          <span>Ali</span>
+                          <span>{{ booking.firstName}}</span>
                         </td>
                         <td>
                           <h4>Last Name :</h4>
-                          <span>TUFAN</span>
+                          <span>{{ booking.lastName }}</span>
                         </td>
                         <td>
                           <h4>Email :</h4>
-                          <span>info@gmail.com</span>
+                          <span>{{ booking.email }}</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <h4>Phone :</h4>
-                          <span>+90 589 658 96 32</span>
+                          <span>{{ booking.mobile }}</span>
                         </td>
 
                       </tr>
@@ -138,7 +138,7 @@
                     </div> -->
                     <div class="rq-info no-bb">
                       <h4>Payment Options :</h4>
-                      <p>Bank Transfer</p>
+                      <p>{{ booking.modeOfPayment }}</p>
                     </div>
                   </div><!--more_information_sec end-->
                 </div>

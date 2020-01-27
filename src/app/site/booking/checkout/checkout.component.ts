@@ -26,6 +26,11 @@ export interface Month {
   viewValue: string;
 }
 
+export interface PaymentMode {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -35,6 +40,7 @@ export class CheckoutComponent implements OnInit {
 
   msgs: Message[] = [];
   loader: boolean = false;
+  propertyName : string;
 
   years: Year[] = [
     { value: '2018', viewValue: '2018' },
@@ -43,6 +49,14 @@ export class CheckoutComponent implements OnInit {
     { value: '2021', viewValue: '2021' },
     { value: '2022', viewValue: '2022' },
     { value: '2023', viewValue: '2023' }
+  ];
+  paymentModes: PaymentMode[] = [
+    { value: 'Card', viewValue: 'Card' },
+    { value: 'Cash', viewValue: 'Cash' },
+    { value: 'BankTransfer', viewValue: 'BankTransfer' },
+    { value: 'Wallet', viewValue: 'Wallet' },
+    { value: 'Cheque', viewValue: 'Cheque' },
+    { value: 'DemandDraft', viewValue: 'DemandDraft' }
   ];
   currencies: Currency[] = [
     { value: 'NZD', viewValue: 'NZD' },
@@ -71,6 +85,8 @@ export class CheckoutComponent implements OnInit {
   cvv: FormControl = new FormControl("" ,Validators.required);
   cardHolderName: FormControl = new FormControl("" ,Validators.required);
   cardNumber: FormControl = new FormControl("" ,Validators.required);
+  paymentMode: FormControl = new FormControl("" ,Validators.required);
+  bookingAmount: FormControl = new FormControl("" ,Validators.required);
 
   onPaymentForm: FormGroup = new FormGroup({
     expMonth: this.expMonth,
@@ -78,6 +94,8 @@ export class CheckoutComponent implements OnInit {
     cvv: this.cvv,
     cardHolderName : this.cardHolderName,
     cardNumber: this.cardNumber,
+    paymentMode : this.paymentMode,
+    bookingAmount : this.bookingAmount,
   });
 
 
@@ -126,14 +144,98 @@ export class CheckoutComponent implements OnInit {
 
         this.getCheckInDateFormat(this.dateModel.checkedin);
         this.getCheckOutDateFormat(this.dateModel.checkout);
+
+        this.booking.businessEmail = this.booking.email;
+        this.booking.fromDate = this.dateModel.checkedin;
+        this.booking.toDate = this.dateModel.checkout;
+        this.booking.roomId = parseInt(this.room.id);
+        this.booking.propertyId = PROPERTY_ID;
+        this.checkAvailabilty();
     }
 
   });
  }
 
+ checkAvailabilty() {
+
+  this.loader = true;
+  this.msgs = [];
+
+  console.log('this.booking: '+JSON.stringify(this.booking));
+
+  const checkAvailabilityObsrv = this.apiService.checkAvailability(this.booking).subscribe(response => {
+    this.loader = false;
+    if (response.status === 200) {
+
+      this.booking.available = response.body.available;
+      this.booking.totalAmount = response.body.bookingAmount ;
+      this.booking.payableAmount = response.body.bookingAmount;
+      this.booking.noOfExtraPerson = response.body.noOfExtraPerson;
+      this.booking.extraPersonCharge = response.body.extraPersonCharge;
+
+      console.log('this.booking: 200: '+JSON.stringify(this.booking));
+
+      if (this.booking.available === false) {
+        this.msgs.push({
+          severity: 'warn',
+          summary:
+            'Appologies ! Seems we are soldout for the selected dates,please leave your details we will getback with in 24 hours. '
+        });
+        //this.bookingButtonLabel = 'Enquire';
+      } else {
+        //this.bookingButtonLabel = 'Book';
+      }
+    } else {
+      this.msgs.push({
+        severity: 'error',
+        summary: response.status + ':' + response.statusText
+      });
+
+    }
+  },
+    error => this.handleError(error)
+  );
+}
+
+private handleError(error: HttpErrorResponse) {
+  this.msgs = [];
+  this.loader = false;
+  if (error.error instanceof ErrorEvent) {
+    this.msgs.push({
+      severity: 'error',
+      summary: ` The server responded with  erorr code : ${error.status} ,
+          please email   ${this.booking.businessEmail} to the proceed with the booking `
+
+    });
+  } else {
+    this.msgs.push({
+      severity: 'error',
+      summary: ` Erorr code : ${error.status} ,
+          please  email   ${this.booking.businessEmail} to the proceed with the booking `
+    });
+  }
+  // return an observable with a user-facing error message
+  /*return throwError(
+    ` The server responded with  erorr code : ${error.status} ,
+          please  email   ${this.booking.businessEmail} to the proceed with the booking `
+  );*/
+}
+
  submitPayment()
  {
-  this.chargeCreditCard();
+  if (this.booking.modeOfPayment != null && this.booking.modeOfPayment === 'Card') {
+    this.chargeCreditCard();
+    // this.processPayment(this.payment);
+  } else if (this.booking.modeOfPayment != null && this.booking.modeOfPayment != 'Card') {
+    this.loader = true;
+    this.payment.amount = this.booking.payableAmount;
+    this.payment.paymentMode = this.booking.modeOfPayment;
+    this.payment.currency = 'NZD';
+    this.payment.email = this.booking.email;
+    this.payment.businessEmail = this.booking.businessEmail;
+    this.payment.description = `Accomodation for  ${this.booking.firstName}  at  ${this.propertyName}`;
+    this.createBooking(this.booking);
+  }
  }
 
  chargeCreditCard() {
@@ -145,8 +247,10 @@ export class CheckoutComponent implements OnInit {
     cvc: this.payment.cvv,
 
   }, (status: number, response: any) => {
+
+    console.log('payment res : '+JSON.stringify(response));
     if (status === 200) {
-      this.loader = true;
+
       const token = response.id;
       this.payment.token = token;
       this.payment.amount = this.booking.payableAmount;
@@ -165,11 +269,10 @@ export class CheckoutComponent implements OnInit {
 }
 
 processPayment(payment: Payment) {
-  console.log(this.booking.mobile);
-  this.loader = true;
+
   this.apiService.processPayment(payment)
     .subscribe(response => {
-      this.loader = false;
+
       if (response.status === 200) {
         this.payment = response.body;
         if (this.payment.status === 'Paid') {
@@ -177,6 +280,8 @@ processPayment(payment: Payment) {
           snackBarRef._dismissAfter(5000);
           this.createBooking(this.booking);
         } else {
+          this.loader = false;
+          console.log('payment failure : '+JSON.stringify(payment));
           this.snackBar.open('ErroCode:' + payment.failureCode + 'and Error message :' + payment.failureMessage, '', {
             duration: 5000,
           });
@@ -191,14 +296,12 @@ processPayment(payment: Payment) {
 
 createBooking(booking: Booking) {
   console.log(this.booking.mobile);
-  this.loader = true;
-  //this.spinner = !this.spinner;
   const createBookingObsr = this.apiService.createBooking(booking).subscribe(response => {
-    this.loader = false;
     if (response.status === 200) {
-      this.loader = false;
       this.booking = response.body;
       if (this.booking.id != null) {
+
+        this.openSuccessSnackBar(`Thanks for the booking .Please not the Reservation No:  # ${this.booking.id} and an email is sent with the booking details.`);
         // this.msgs.push({
         //   severity: 'success',
         //   detail:
