@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Room } from 'src/app/room/room';
 import { PROPERTY_ID, ApiService } from 'src/app/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { DateModel } from './../home/model/dateModel';
 
 @Component({
@@ -13,27 +13,28 @@ import { DateModel } from './../home/model/dateModel';
 export class BookingComponent implements OnInit {
 
   rooms: Room[];
-  dateModel : DateModel;
+  dateModel: DateModel;
 
-  daySelected : string;
-  yearSelected : string;
-  monthSelected : number;
+  daySelected: string;
+  yearSelected: string;
+  monthSelected: number;
 
 
-  currentDay : string;
-  day : string;
-  year : string;
-  month : number;
+  currentDay: string;
+  day: string;
+  year: string;
+  month: number;
 
-  day2 : string;
-  year2 : string;
+  day2: string;
+  year2: string;
   month2: number;
 
   monthArray =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-  constructor(private apiService: ApiService,
-    private acRoute : ActivatedRoute,)
-  {
+  constructor(
+    private apiService: ApiService,
+    private acRoute: ActivatedRoute,
+    private router: Router) {
     this.dateModel = new DateModel();
   }
 
@@ -75,7 +76,7 @@ export class BookingComponent implements OnInit {
   }
 
 
-  getDay(date:Date)
+  getDay(date: Date)
   {
     if(date.getDate().toString().length==1)
     {
@@ -107,7 +108,7 @@ export class BookingComponent implements OnInit {
   );
   }
 
-getRoomByDate( fromDate : string ,toDate : string ) {
+getRoomByDate( fromDate: string ,toDate: string ) {
   this.apiService.getRoomDetailsByPropertyIdAndDate(PROPERTY_ID, fromDate, toDate) .subscribe(response => {
 
     console.log('getRoomByDate ' + JSON.stringify(response.body));
@@ -121,7 +122,7 @@ getRoomByDate( fromDate : string ,toDate : string ) {
 );
 }
 
-  getCheckInDateFormat(dateString:string)
+  getCheckInDateFormat(dateString: string)
   {
     var yearAndMonth = dateString.split("-", 3);
     this.daySelected = String(yearAndMonth[2].split(" ", 1));
@@ -131,5 +132,17 @@ getRoomByDate( fromDate : string ,toDate : string ) {
     console.log('final '+this.daySelected +'-'+this.monthSelected +'-'+  this.yearSelected );
   }
 
+  onRoomBooking(room)
+  {
+
+    this.dateModel.room = room;
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          dateob: JSON.stringify(this.dateModel),
+      }
+    };
+    this.router.navigate(['/booking/booking'],navigationExtras );
+  }
 
 }

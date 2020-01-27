@@ -15,13 +15,11 @@ export class RoomsComponent implements OnInit {
 
   constructor(private apiService: ApiService) { }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.getRoom();
   }
 
-  getRoom()
-  {
+  getRoom() {
     this.apiService.getRoomDetailsByPropertyId(PROPERTY_ID).subscribe(response => {
       this.rooms = response.body;
     },

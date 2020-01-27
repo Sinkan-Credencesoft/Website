@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Room } from 'src/app/room/room';
 import { PROPERTY_ID, ApiService } from 'src/app/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { DateModel } from './../../home/model/dateModel';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
@@ -16,24 +16,25 @@ export class ChooseRoomComponent implements OnInit {
 
 
   rooms: Room[];
-  dateModel : DateModel;
+  dateModel: DateModel;
 
-  daySelected : string;
-  yearSelected : string;
-  monthSelected : number;
+  daySelected: string;
+  yearSelected: string;
+  monthSelected: number;
 
-  daySelected2 : string;
-  yearSelected2 : string;
-  monthSelected2 : number;
+  daySelected2: string;
+  yearSelected2: string;
+  monthSelected2: number;
 
 
-  currentDay : string;
+  currentDay: string;
 
   monthArray =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-  constructor(private apiService: ApiService,
-    private router : Router,
-    private acRoute : ActivatedRoute,)
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private acRoute: ActivatedRoute,)
   {
     this.dateModel = new DateModel();
   }
@@ -89,7 +90,7 @@ export class ChooseRoomComponent implements OnInit {
   );
   }
 
-  getRoomByDate( fromDate : string ,toDate : string ) {
+  getRoomByDate( fromDate: string ,toDate: string ) {
     this.apiService.getRoomDetailsByPropertyIdAndDate(PROPERTY_ID, fromDate, toDate) .subscribe(response => {
 
       console.log('getRoomByDate ' + JSON.stringify(response.body));
@@ -103,7 +104,7 @@ export class ChooseRoomComponent implements OnInit {
   );
   }
 
-  getCheckInDateFormat(dateString:string)
+  getCheckInDateFormat(dateString: string)
   {
     var yearAndMonth = dateString.split("-", 3);
     this.daySelected = String(yearAndMonth[2].split(" ", 1));
@@ -111,7 +112,7 @@ export class ChooseRoomComponent implements OnInit {
     this.monthSelected = parseInt(yearAndMonth[1])-1;
   }
 
-  getCheckOutDateFormat(dateString:string)
+  getCheckOutDateFormat(dateString: string)
   {
     var yearAndMonth = dateString.split("-", 3);
     this.daySelected2 = String(yearAndMonth[2].split(" ", 1));
