@@ -44,6 +44,7 @@ import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
 import { HomeModule } from './site/home/home.module';
 import { DetailsComponent } from './site/rooms/details/details.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AboutComponent } from './site/about/about.component';
 const routes: Routes = [
   { path: '', component: SiteModule},
 
@@ -66,7 +67,8 @@ const routes: Routes = [
     FooterComponent,
     SidebarComponent,
     DetailsComponent,
-    BookingComponent
+    BookingComponent,
+    AboutComponent
   ],
   entryComponents: [BookingComponent],
   imports: [
@@ -100,7 +102,7 @@ const routes: Routes = [
   providers: [
     ApiService,
     HTTPStatus,
-    // {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
