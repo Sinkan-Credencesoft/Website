@@ -51,7 +51,7 @@ export class ChooseRoomComponent implements OnInit {
 
           console.log('this.dateModel '+JSON.stringify(this.dateModel));
 
-          this.getRoomByDate( this.dateModel.checkedin  ,this.dateModel.checkout  );
+        //  this.getRoomByDate( this.dateModel.checkedin  ,this.dateModel.checkout  );
 
           this.getCheckInDateFormat(this.dateModel.checkedin);
           this.getCheckOutDateFormat(this.dateModel.checkout);

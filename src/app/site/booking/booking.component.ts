@@ -4,6 +4,7 @@ import { PROPERTY_ID, ApiService } from 'src/app/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from "@angular/router";
 import { DateModel } from './../home/model/dateModel';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
