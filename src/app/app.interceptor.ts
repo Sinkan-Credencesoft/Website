@@ -35,7 +35,7 @@ export class Interceptor implements HttpInterceptor {
     Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
     const authReq = req;
     this.status.setHttpStatus(true);
-    console.log('URL:' + req.url);
+
     return next.handle(authReq).pipe(
       map(event => {
         return event;

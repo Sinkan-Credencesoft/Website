@@ -16,7 +16,7 @@ export class ContactComponent implements OnInit {
   lat = -36.79648;
   lng = 174.646926;
   constructor(private apiService: ApiService) {
-    console.log(this.property); }
+    }
   ngOnInit() {
 
     this.getProperty();
@@ -25,7 +25,6 @@ export class ContactComponent implements OnInit {
   getProperty() {
     this.apiService.getPropertyDetailsByPropertyId(PROPERTY_ID).subscribe(response => {
 
-     // console.log('response room ' + JSON.stringify(response.body));
       this.property = response.body;
     },
       error => {

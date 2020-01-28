@@ -11,9 +11,6 @@ const ROOM_TYPES = 'RoomDetails';
 const ROLES = 'Roles';
 
 const PROPERTY_DETAILS = 'PropertyDetails';
-const BOOKING_DETAILS = 'BookingDetails';
-const ROOM_DETAILS = 'P-Room-Detail';
-const USER_NAME = 'UserName';
 
 
 @Injectable()

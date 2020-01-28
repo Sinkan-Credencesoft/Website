@@ -49,8 +49,6 @@ export class ChooseRoomComponent implements OnInit {
       {
           this.dateModel = JSON.parse(params["dateob"]);
 
-          console.log('this.dateModel '+JSON.stringify(this.dateModel));
-
         //  this.getRoomByDate( this.dateModel.checkedin  ,this.dateModel.checkout  );
 
           this.getCheckInDateFormat(this.dateModel.checkedin);
@@ -93,7 +91,6 @@ export class ChooseRoomComponent implements OnInit {
   getRoomByDate( fromDate: string ,toDate: string ) {
     this.apiService.getRoomDetailsByPropertyIdAndDate(PROPERTY_ID, fromDate, toDate) .subscribe(response => {
 
-      console.log('getRoomByDate ' + JSON.stringify(response.body));
       this.rooms = response.body;
     },
       error => {

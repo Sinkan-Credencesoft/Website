@@ -72,7 +72,6 @@ export class NewBookingComponent implements OnInit {
         this.dateModel = JSON.parse(params["dateob"]);
 
         this.room = this.dateModel.room;
-        console.log('this.dateModel '+JSON.stringify(this.dateModel));
 
         this.getCheckInDateFormat(this.dateModel.checkedin);
         this.getCheckOutDateFormat(this.dateModel.checkout);
@@ -93,7 +92,6 @@ export class NewBookingComponent implements OnInit {
        this.booking.noOfRooms = roomNumber;
        // this.noOfRooms.reset();
        this.noOfRooms.setValue(roomNumber);
-       console.log(this.booking.noOfRooms+'on room change : '+roomNumber);
      }
    }
  }
@@ -114,8 +112,6 @@ export class NewBookingComponent implements OnInit {
 
  onCheckOut()
  {
-    console.log('this.booking: '+JSON.stringify(this.booking));
-
     this.dateModel.booking = this.booking;
 
     let navigationExtras: NavigationExtras = {

@@ -161,8 +161,6 @@ export class CheckoutComponent implements OnInit {
   this.loader = true;
   this.msgs = [];
 
-  console.log('this.booking: '+JSON.stringify(this.booking));
-
   const checkAvailabilityObsrv = this.apiService.checkAvailability(this.booking).subscribe(response => {
     this.loader = false;
     if (response.status === 200) {
@@ -172,8 +170,6 @@ export class CheckoutComponent implements OnInit {
       this.booking.payableAmount = response.body.bookingAmount;
       this.booking.noOfExtraPerson = response.body.noOfExtraPerson;
       this.booking.extraPersonCharge = response.body.extraPersonCharge;
-
-      console.log('this.booking: 200: '+JSON.stringify(this.booking));
 
       if (this.booking.available === false) {
         this.msgs.push({
@@ -248,7 +244,6 @@ private handleError(error: HttpErrorResponse) {
 
   }, (status: number, response: any) => {
 
-    console.log('payment res : '+JSON.stringify(response));
     if (status === 200) {
 
       const token = response.id;
@@ -281,7 +276,6 @@ processPayment(payment: Payment) {
           this.createBooking(this.booking);
         } else {
           this.loader = false;
-          console.log('payment failure : '+JSON.stringify(payment));
           this.snackBar.open('ErroCode:' + payment.failureCode + 'and Error message :' + payment.failureMessage, '', {
             duration: 5000,
           });
@@ -295,7 +289,7 @@ processPayment(payment: Payment) {
 }
 
 createBooking(booking: Booking) {
-  console.log(this.booking.mobile);
+
   const createBookingObsr = this.apiService.createBooking(booking).subscribe(response => {
     if (response.status === 200) {
       this.booking = response.body;
@@ -365,7 +359,7 @@ sendConfirmationMessage() {
   msg.fromNumber = SMS_NUMBER;
   msg.toNumber = this.booking.mobile ;
   msg.message = `Dear ${this.booking.firstName},Rsvn#:${this.booking.id},${this.booking.roomName},Chk-In:${this.booking.fromDate},Chk-Out:${this.booking.toDate},Amt:${this.booking.payableAmount}NZD.Thx.${this.booking.businessName},${this.booking.mobile}` ;
-  console.log(msg.message);
+
   this.apiService.sendTextMessage(msg).subscribe(response1 => {
     msg = response1.body;
     if ( msg.sid !== undefined ||  msg.sid !== null ) {
