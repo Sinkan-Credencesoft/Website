@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
   getProperty() {
     this.apiService.getPropertyDetailsByPropertyId(PROPERTY_ID).subscribe(response => {
 
-     // console.log('response room ' + JSON.stringify(response.body));
       this.property = response.body;
       this.token.savePropertyName(this.property.name);
     },
