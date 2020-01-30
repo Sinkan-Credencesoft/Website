@@ -126,11 +126,6 @@ export class NewBookingComponent implements OnInit {
     noOfRooms: this.noOfRooms,
     bookingAmount : this.bookingAmount,
     paymentMode: this.paymentMode,
-    // cardHolderName : this.cardHolderName,
-    // cardNumber : this.cardNumber,
-    // expMonth : this.expMonth,
-    // expYear : this.expYear,
-    // cvv : this.cvv,
   });
 
   onPaymentForm: FormGroup = new FormGroup({

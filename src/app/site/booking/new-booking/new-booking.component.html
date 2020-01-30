@@ -461,10 +461,11 @@
                           </div>
                         </div>
                         <div class="col-lg-12">
-                          <div class="form-submit">
+                          <div class="form-submit" >
+                            <!--  [disabled]="!onBookingForm.valid" -->
                             <button mat-raised-button
-                                [disabled]="!onBookingForm.valid"
                                 (click)="submitPayment()"
+                                *ngIf="onBookingForm.valid && booking.modeOfPayment != 'Card' || onBookingForm.valid && booking.modeOfPayment == 'Card' && onPaymentForm.valid"
                                 class="lnk-default"
                                 color="primary">
                                 Pay and book now <i class="la la-arrow-right"></i>
