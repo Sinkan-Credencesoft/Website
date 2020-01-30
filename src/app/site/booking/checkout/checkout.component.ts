@@ -41,6 +41,7 @@ export class CheckoutComponent implements OnInit {
   msgs: Message[] = [];
   loader: boolean = false;
   propertyName : string;
+  isAvailableChecked : boolean = true;
 
   years: Year[] = [
     { value: '2018', viewValue: '2018' },
@@ -87,6 +88,9 @@ export class CheckoutComponent implements OnInit {
   cardNumber: FormControl = new FormControl("" ,Validators.required);
   paymentMode: FormControl = new FormControl("" ,Validators.required);
   bookingAmount: FormControl = new FormControl("" ,Validators.required);
+
+  checkedin: FormControl = new FormControl();
+  checkedout: FormControl = new FormControl();
 
   onPaymentForm: FormGroup = new FormGroup({
     expMonth: this.expMonth,
@@ -156,6 +160,80 @@ export class CheckoutComponent implements OnInit {
   });
  }
 
+ checkedOutEvent()
+ {
+  this.isAvailableChecked = false;
+ }
+
+ checkedInEvent()
+ {
+  this.isAvailableChecked = false;
+   let currentDate: Date = new Date(this.checkedin.value);
+
+   let afterDate: Date = new Date();
+   afterDate.setDate(currentDate.getDate()+1);
+   afterDate.setFullYear(currentDate.getFullYear());
+   afterDate.setMonth(currentDate.getMonth());
+
+   this.daySelected2 = this.getDay(afterDate);
+   this.yearSelected2 = String(afterDate.getFullYear());
+   this.monthSelected2 = afterDate.getMonth();
+ }
+ getDay(date:Date)
+ {
+   if(date.getDate().toString().length==1)
+   {
+       this.currentDay = '0'+date.getDate();
+   }
+   else
+   {
+       this.currentDay = ''+date.getDate();
+   }
+
+   return this.currentDay;
+ }
+ getRoomByDate()
+ {
+
+  if(this.checkedin.value === null)
+  {
+    this.dateModel.checkedin = this.yearSelected+'-'+this.monthSelected+1+'-'+this.daySelected;
+  }
+  else
+  {
+    this.dateModel.checkedin = this.getDateFormat(this.checkedin.value);
+  }
+
+  if(this.checkedout.value === null)
+  {
+    this.dateModel.checkout =  this.yearSelected2+'-'+this.monthSelected2+1+'-'+this.daySelected2;
+  }
+  else
+  {
+    this.dateModel.checkout = this.getDateFormat(this.checkedout.value);
+  }
+
+  if(this.dateModel.checkout !=undefined && this.dateModel.checkedin !=undefined)
+  {
+     this.isAvailableChecked = true;
+
+     this.booking.businessEmail = this.booking.email;
+     this.booking.fromDate = this.dateModel.checkedin;
+     this.booking.toDate = this.dateModel.checkout;
+     this.booking.roomId = parseInt(this.room.id);
+     this.booking.propertyId = PROPERTY_ID;
+     this.checkAvailabilty();
+
+  }
+
+ }
+
+ getDateFormat(dateString:string)
+ {
+   var yearAndMonth = dateString.split("-", 3);
+   return yearAndMonth[0]+'-'+yearAndMonth[1]+'-'+ yearAndMonth[2].split(" ", 1);
+ }
+
  checkAvailabilty() {
 
   this.loader = true;
@@ -170,6 +248,8 @@ export class CheckoutComponent implements OnInit {
       this.booking.payableAmount = response.body.bookingAmount;
       this.booking.noOfExtraPerson = response.body.noOfExtraPerson;
       this.booking.extraPersonCharge = response.body.extraPersonCharge;
+
+      console.log('avaiability'+JSON.stringify(response.body))
 
       if (this.booking.available === false) {
         this.msgs.push({

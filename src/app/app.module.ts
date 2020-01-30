@@ -44,6 +44,8 @@ import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
 import { HomeModule } from './site/home/home.module';
 import { DetailsComponent } from './site/rooms/details/details.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { TokenStorage } from '../../src/app/token.storage';
+
 import { AboutComponent } from './site/about/about.component';
 const routes: Routes = [
   { path: '', component: SiteModule},
@@ -102,6 +104,7 @@ const routes: Routes = [
   providers: [
     ApiService,
     HTTPStatus,
+    TokenStorage,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     {
       provide: HTTP_INTERCEPTORS,
