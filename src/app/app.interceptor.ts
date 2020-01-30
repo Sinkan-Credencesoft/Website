@@ -4,8 +4,8 @@ import {
   HttpResponse, HttpUserEvent, HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 

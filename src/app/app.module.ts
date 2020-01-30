@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
-
+import { TokenStorage } from '../../src/app/token.storage';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './site/home/home.component';
@@ -103,6 +103,7 @@ const routes: Routes = [
   ],
   providers: [
     ApiService,
+    TokenStorage,
     HTTPStatus,
     TokenStorage,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
