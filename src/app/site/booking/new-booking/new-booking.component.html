@@ -1,5 +1,5 @@
 <section class="main-content bkng">
-  <div class="container">
+  <div class="cotnainer">
     <div class="page-content">
       <div class="booking-tabs-list">
         <ul class="nav nav-tabs" id="myTab3" role="tablist">
@@ -9,9 +9,9 @@
             <li class="nav-item">
               <a class="nav-link active" id="booking_tab" > <span class="nom"></span> BOOKING</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" > <span class="nom"></span> CHECKOUT</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" ><span class="nom"></span> THANK YOU</a>
             </li>
@@ -94,122 +94,366 @@
                 </div>
                 <div class="col-lg-8">
                   <div class="booking_form">
-                    <span class="guest-notif">You are booking for property.name's {{ this.room.name }}. </span>
-                    <!--<div class="services_select">
-                    <div class="seachby">
-                      <h3>Add Extra Servıces</h3>
-                      <ul>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_11" >
-                            <label for="c_11"><span></span><b>Wifi : 100 $ ( Room / Night ) = 700 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_12">
-                            <label for="c_12"><span></span><b>Sea View : 10 $ ( Room / Night ) = 200 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_13">
-                            <label for="c_13"><span></span><b>Car Rental : 30 $ ( Room / Night ) = 200 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_14">
-                            <label for="c_14"><span></span><b>Laundry : 10 $ ( Guest / Night ) = 400 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_15">
-                            <label for="c_15"><span></span><b>Satellite TV : 50 $ ( Room / Trip ) = 250 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_16">
-                            <label for="c_16"><span></span><b>Breakfast : 10 $ ( Guest / Night ) = 150 $</b></label>
-                          </div>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>services_select end-->
+                    <mat-progress-bar *ngIf="loader" color="warn" mode="indeterminate"></mat-progress-bar>
+                    <span class="guest-notif">You are booking for {{this.token.getPropertyName()}}'s {{ this.room.name }}. </span>
+
                   <div class="information_form">
-                    <h3>Add Booking Informatıons</h3>
+                    <mat-card-title>Add Booking Informatıons</mat-card-title>
+                    <mat-card class="card-back">
+
                     <form [formGroup]="onBookingForm">
                       <div class="row">
+                        <div class="row">
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>First Name</label>
-                            <input type="text"
-                              name="firstName"
-                              [formControl]="firstName"
-                              [(ngModel)]="booking.firstName"
-                             placeholder="">
-                          </div><!--form-field end-->
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>First Name</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            placeholder="First Name"
+                            [formControl]="firstName"
+                            [(ngModel)]="booking.firstName"
+
+                          />
+                          <mat-error *ngIf="!firstName.valid && firstName.touched"
+                            >First Name is required</mat-error
+                          >
+                          <mat-hint>First Name of the Guest.</mat-hint>
+                        </mat-form-field>
                         </div>
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Last Name</label>
-                            <input type="text"
-                            name="lastName"
-                            placeholder=""
+
+
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>Last Name</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            placeholder="Last Name"
                             [formControl]="lastName"
-                            [(ngModel)]="booking.lastName">
-                          </div><!--form-field end-->
+                            [(ngModel)]="booking.lastName"
+                          />
+                          <mat-error *ngIf="!lastName.valid && lastName.touched"
+                            >Last Name is required</mat-error
+                          >
+                          <mat-hint>Last Name of the Guest.</mat-hint>
+                        </mat-form-field>
                         </div>
+
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Email *</label>
-                            <input type="email"
-                            name="email"
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>Email</mat-label>
+                          <input
+                            type="email"
+                            matInput
+                            placeholder="Email"
                             [formControl]="bookingEmail"
                             [(ngModel)]="booking.email"
-                            placeholder="">
-                          </div><!--form-field end-->
+
+                          />
+                          <mat-error *ngIf="!bookingEmail.valid && bookingEmail.touched"
+                            >Invalid Email Address!</mat-error
+                          >
+                          <mat-hint
+                            >Guest's email if not avaialable then use your
+                            own.</mat-hint
+                          >
+                        </mat-form-field>
+
                         </div>
+
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Phone Number *</label>
-                            <input type="text" name="mobile" placeholder=""
+
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>Contact Number</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            placeholder="Contact Number"
+                            minlength="9"
+                            maxlength="14"
+                            pattern="[0-9]"
                             [formControl]="bookingContact"
-                            [(ngModel)]="booking.mobile">
-                          </div><!--form-field end-->
+                            [(ngModel)]="booking.mobile"
+
+                          />
+                          <mat-error
+                            *ngIf="!bookingContact.valid && bookingContact.touched"
+                            >Invalid Contact Number !</mat-error
+                          >
+                          <mat-error *ngIf="bookingContact.minlength"
+                            >Invalid Contact Number !</mat-error
+                          >
+                          <mat-error *ngIf="bookingContact.maxlength"
+                            >Invalid Contact Number !</mat-error
+                          >
+                          <mat-hint
+                            >Mention the country code for Overseas Number.</mat-hint
+                          >
+                        </mat-form-field>
+
                         </div>
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Number of Room</label>
-                            <input type="number" name="noOfRoom" placeholder="" [formControl]="noOfRooms"
+
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>No of Rooms</mat-label>
+
+                          <input
+                            type="number"
+                            matInput
+                            placeholder="No of Rooms"
+                            [formControl]="noOfRooms"
                             [(ngModel)] ="booking.noOfRooms"
                             (ngModelChange)="onChangeRoom($event,room.noOfRooms)"
                             min="1"
-                            max="{{ room.noOfRooms }}">
-                          </div><!--form-field end-->
+                            max="{{ room.noOfRooms }}"
+
+                          />
+
+                        </mat-form-field>
+
+
                         </div>
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Number of Guest</label>
-                            <input type="number" name="noOfGuest" placeholder=""
-                            [formControl]="noOfPersons"
-                            (ngModelChange)="onChangePerson($event,room.maximumOccupancy*booking.noOfRooms)"
-                            [(ngModel)]="booking.noOfPersons"
-                            min="1"
-                            max="{{ room.maximumOccupancy*booking.noOfRooms }}">
-                          </div><!--form-field end-->
+
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                            appearance="outline"
+                          >
+                          <mat-label>No Of Person(s)</mat-label>
+                            <input
+                              type="number"
+                              matInput
+                              placeholder="No Of Person(s)"
+                              [formControl]="noOfPersons"
+                              (ngModelChange)="onChangePerson($event,room.maximumOccupancy*booking.noOfRooms)"
+                              [(ngModel)]="booking.noOfPersons"
+                              min="1"
+                              max="{{ room.maximumOccupancy*booking.noOfRooms }}"
+
+                            />
+                            <mat-error *ngIf="!noOfPersons.valid && noOfPersons.touched"
+                              >No Of Person Required!</mat-error
+                            >
+                            <mat-hint>No Of Persons above 5 years</mat-hint>
+                          </mat-form-field>
+
                         </div>
+
+                        <div class="col-lg-6">
+
+                          <mat-form-field
+                            class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+
+                            appearance="outline"
+                          >
+                          <mat-label>Amount</mat-label>
+                            <input
+                              type="text"
+                              matInput
+                              placeholder="Booking Amount"
+                              [formControl]="bookingAmount"
+                              [(ngModel)]="booking.payableAmount"
+                            />
+                          </mat-form-field>
+
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+                            <mat-form-field
+                            class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                            appearance="outline"
+                          >
+                          <mat-label>Mode of Payment</mat-label>
+                            <mat-select
+                              placeholder="Mode of Payment"
+                              [(ngModel)]="booking.modeOfPayment"
+                              [formControl]="paymentMode"
+
+                            >
+                              <mat-option
+                                *ngFor="let paymentMode of paymentModes"
+                                [value]="paymentMode.value"
+                              >
+                                {{ paymentMode.viewValue }}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="!paymentMode.valid && paymentMode.touched"
+                              >Payment mode is required!</mat-error
+                            >
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                        <!-- <div *ngIf="booking.modeOfPayment == 'Card'"> -->
+                          <form [formGroup]="onPaymentForm">
+                          <div class="row" *ngIf="booking.modeOfPayment == 'Card'">
+
+
+                            <div class="col-lg-6">
+
+                              <mat-form-field
+                              class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                              appearance="outline" >
+
+                              <mat-label>Card Number</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                placeholder="Card Number"
+                                minlength="16"
+                                maxlength="16"
+                                pattern="[0-9]{16}"
+                                [formControl]="cardNumber"
+                                [(ngModel)]="payment.cardNumber"
+
+                              />
+                              <mat-error *ngIf="!cardNumber.valid && cardNumber.touched"
+                                >Invalid Card Number!</mat-error
+                              >
+                              <mat-error *ngIf="cardNumber.minlength"
+                                >Card Number must be 16 digits !</mat-error
+                              >
+                              <mat-error *ngIf="cardNumber.maxlength"
+                                >Card Number must be 16 digits !</mat-error
+                              >
+
+                            </mat-form-field>
+
+                            </div>
+
+                            <div class="col-lg-6">
+
+                              <mat-form-field
+                              class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                              appearance="outline" >
+
+                              <mat-label>Name On Card</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                placeholder="Name On Card"
+                                [formControl]="cardHolderName"
+                                [(ngModel)]="payment.cardHolderName"
+
+                              />
+                              <mat-hint>16 Digit Master/Visa Card Number.</mat-hint>
+                              <mat-error
+                                *ngIf="!cardHolderName.valid && cardHolderName.touched"
+                                >Cardholder Name is required!</mat-error
+                              >
+
+                            </mat-form-field>
+
+                            </div>
+
+                            <div class="col-lg-4">
+
+                              <mat-form-field
+                              class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                              appearance="outline"
+                            >
+                            <mat-label>Expiration Month</mat-label>
+                              <mat-select
+                                placeholder="Expiration Month"
+                                [(ngModel)]="payment.expMonth"
+                                [formControl]="expMonth"
+                              >
+                                <mat-option
+                                  *ngFor="let month of months"
+                                  [value]="month.value"
+                                >
+                                  {{ month.viewValue }}
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="!expMonth.valid && expMonth.touched"
+                                >Card Expiration Month is required!</mat-error
+                              >
+                            </mat-form-field>
+
+                            </div>
+
+                            <div class="col-lg-4">
+
+                              <mat-form-field
+                              class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                              appearance="outline"
+                            >
+                            <mat-label>Expiration Year</mat-label>
+                              <mat-select
+                                placeholder="Expiration Year"
+                                [(ngModel)]="payment.expYear"
+                                [formControl]="expYear"
+
+                              >
+                                <mat-option *ngFor="let year of years" [value]="year.value">
+                                  {{ year.viewValue }}
+                                </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="!expYear.valid && expYear.touched"
+                                >Card Expiration Year is required!</mat-error
+                              >
+                            </mat-form-field>
+
+                            </div>
+
+                            <div class="col-lg-4">
+
+                              <mat-form-field
+                              class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                              appearance="outline"
+                            >
+                            <mat-label>CVV</mat-label>
+                              <input
+                                type="text"
+                                minlength="3"
+                                maxlength="3"
+                                matInput
+                                placeholder="CVV"
+                                [formControl]="cvv"
+                                pattern="[0-9]{3}"
+                                [(ngModel)]="payment.cvv"
+
+                              />
+                              <mat-hint>Three Digit Number back of the Card.</mat-hint>
+                              <mat-error *ngIf="!cvv.valid && cvv.touched"
+                                >Invalid CVV!</mat-error
+                              >
+                              <mat-error *ngIf="cvv.minlength || cvv.maxlength"
+                                >CVV must be of 3 digits !</mat-error
+                              >
+                            </mat-form-field>
+
+                            </div>
+
+
+                        </div>
+                      </form>
+                        <!-- </div> -->
 
                         <div class="col-lg-12">
                           <div class="seachby">
                             <ul>
                               <li>
                                 <div class="inp-field">
-                                  <!-- <input type="checkbox" [formControl]="termAndConditions" name="cc8" id="c87">
-                                  <label for="c87"><span></span><b>Terms and conditions *</b></label> -->
+
                                 </div>
                               </li>
                             </ul>
@@ -220,16 +464,17 @@
                           <div class="form-submit">
                             <button mat-raised-button
                                 [disabled]="!onBookingForm.valid"
-                                (click)="onCheckOut()"
+                                (click)="submitPayment()"
                                 class="lnk-default"
                                 color="primary">
-                                Checkout <i class="la la-arrow-right"></i>
+                                Pay and book now <i class="la la-arrow-right"></i>
                                 </button>
-                            <!-- <button type="submit" [disabled]="!onBookingForm.valid" class="lnk-default">Checkout <i class="la la-arrow-right"></i></button> -->
+
                           </div><!--form-submit end-->
                         </div>
                       </div>
                     </form>
+                    </mat-card>
                   </div><!--information_form end-->
                   </div><!--booking_form END-->
                 </div>

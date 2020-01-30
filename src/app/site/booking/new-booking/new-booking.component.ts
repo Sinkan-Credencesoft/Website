@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Room } from 'src/app/room/room';
-import { PROPERTY_ID, ApiService } from 'src/app/api.service';
+import { PROPERTY_ID, ApiService ,SMS_NUMBER} from 'src/app/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from "@angular/router";
 import { DateModel } from './../../home/model/dateModel';
@@ -8,6 +8,30 @@ import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { Booking } from '../../../booking/booking';
 import { FormControl, FormGroup, NgForm, FormGroupDirective, Validators,FormBuilder } from '@angular/forms';
+import { Payment } from './../../../payment/payment';
+import { TokenStorage } from '../../../token.storage';
+import { Message } from 'primeng/components/common/api';
+import { Msg } from './../../../booking/msg';
+import { MatSnackBar } from '@angular/material';
+
+export interface PaymentMode {
+  value: string;
+  viewValue: string;
+}
+
+
+export interface Year {
+  value: string;
+  viewValue: string;
+}
+export interface Currency {
+  value: string;
+  viewValue: string;
+}
+export interface Month {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-new-booking',
@@ -16,10 +40,51 @@ import { FormControl, FormGroup, NgForm, FormGroupDirective, Validators,FormBuil
 })
 export class NewBookingComponent implements OnInit {
 
+  paymentModes: PaymentMode[] = [
+    { value: 'Card', viewValue: 'Card' },
+    { value: 'Cash', viewValue: 'Cash' },
+    { value: 'Bank Transfer', viewValue: 'Bank Transfer' },
+    { value: 'Wallet', viewValue: 'Wallet' },
+    { value: 'Cheque', viewValue: 'Cheque' },
+    { value: 'DemandDraft', viewValue: 'DemandDraft' }
+  ];
+
+  years: Year[] = [
+    { value: '2018', viewValue: '2018' },
+    { value: '2019', viewValue: '2019' },
+    { value: '2020', viewValue: '2020' },
+    { value: '2021', viewValue: '2021' },
+    { value: '2022', viewValue: '2022' },
+    { value: '2023', viewValue: '2023' }
+  ];
+  currencies: Currency[] = [
+    { value: 'NZD', viewValue: 'NZD' },
+    { value: 'AUD', viewValue: 'AUD' },
+    { value: 'GBP', viewValue: 'GBP' },
+    { value: 'USD', viewValue: 'USD' },
+    { value: 'EUR', viewValue: 'EUR' },
+    { value: 'INR', viewValue: 'INR' }
+  ];
+  months: Month[] = [
+    { value: '01', viewValue: '01' },
+    { value: '02', viewValue: '02' },
+    { value: '03', viewValue: '03' },
+    { value: '04', viewValue: '04' },
+    { value: '05', viewValue: '05' },
+    { value: '06', viewValue: '06' },
+    { value: '07', viewValue: '07' },
+    { value: '08', viewValue: '08' },
+    { value: '09', viewValue: '09' },
+    { value: '10', viewValue: '10' },
+    { value: '11', viewValue: '11' },
+    { value: '12', viewValue: '12' }
+  ];
+
   rooms: Room[];
   room: Room;
   dateModel : DateModel;
   booking : Booking;
+  payment : Payment;
 
   daySelected : string;
   yearSelected : string;
@@ -29,18 +94,28 @@ export class NewBookingComponent implements OnInit {
   yearSelected2 : string;
   monthSelected2 : number;
 
-
+  msgs: Message[] = [];
+  loader: boolean = false;
   currentDay : string;
 
   monthArray =['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
   firstName: FormControl = new FormControl("",Validators.required);
   lastName: FormControl = new FormControl("",Validators.required);
-  bookingEmail: FormControl = new FormControl("",Validators.required);
-  bookingContact: FormControl = new FormControl("",Validators.required);
+  bookingEmail: FormControl = new FormControl("",Validators.nullValidator);
+  bookingContact: FormControl = new FormControl("",Validators.nullValidator);
   noOfPersons: FormControl = new FormControl("",Validators.required);
   noOfRooms: FormControl = new FormControl("",Validators.required);
+  bookingAmount: FormControl = new FormControl("",Validators.nullValidator);
+  paymentMode: FormControl = new FormControl("",Validators.required);
   //termAndConditions : FormControl = new FormControl("",Validators.required);
+
+  expMonth: FormControl = new FormControl("",Validators.required);
+  expYear: FormControl = new FormControl("",Validators.required);
+  cvv: FormControl = new FormControl("",Validators.required);
+
+  cardHolderName: FormControl = new FormControl("",Validators.required);
+  cardNumber: FormControl = new FormControl("",Validators.required);
 
   onBookingForm: FormGroup = new FormGroup({
     firstName: this.firstName,
@@ -49,14 +124,31 @@ export class NewBookingComponent implements OnInit {
     bookingContact : this.bookingContact,
     noOfPersons: this.noOfPersons,
     noOfRooms: this.noOfRooms,
-   // termAndConditions : this.termAndConditions,
+    bookingAmount : this.bookingAmount,
+    paymentMode: this.paymentMode,
+    // cardHolderName : this.cardHolderName,
+    // cardNumber : this.cardNumber,
+    // expMonth : this.expMonth,
+    // expYear : this.expYear,
+    // cvv : this.cvv,
+  });
+
+  onPaymentForm: FormGroup = new FormGroup({
+    expMonth: this.expMonth,
+    expYear: this.expYear,
+    cvv: this.cvv,
+    cardHolderName : this.cardHolderName,
+    cardNumber: this.cardNumber,
   });
 
   constructor(private apiService: ApiService,
     private router : Router,
     private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
+    private token :TokenStorage,
     private acRoute : ActivatedRoute,)
   {
+    this.payment = new Payment();
     this.dateModel = new DateModel();
     this.booking = new Booking();
     this.room = new Room();
@@ -75,10 +167,234 @@ export class NewBookingComponent implements OnInit {
 
         this.getCheckInDateFormat(this.dateModel.checkedin);
         this.getCheckOutDateFormat(this.dateModel.checkout);
+
+        this.booking.businessEmail = this.booking.email;
+        this.booking.fromDate = this.dateModel.checkedin;
+        this.booking.toDate = this.dateModel.checkout;
+        this.booking.roomId = parseInt(this.room.id);
+        this.booking.propertyId = PROPERTY_ID;
+        this.checkAvailabilty();
     }
 
   });
  }
+
+ checkAvailabilty() {
+
+  this.loader = true;
+  this.msgs = [];
+
+  const checkAvailabilityObsrv = this.apiService.checkAvailability(this.booking).subscribe(response => {
+    this.loader = false;
+    if (response.status === 200) {
+
+      this.booking.available = response.body.available;
+      this.booking.totalAmount = response.body.bookingAmount ;
+      this.booking.payableAmount = response.body.bookingAmount;
+      this.booking.noOfExtraPerson = response.body.noOfExtraPerson;
+      this.booking.extraPersonCharge = response.body.extraPersonCharge;
+
+      if (this.booking.available === false) {
+        this.msgs.push({
+          severity: 'warn',
+          summary:
+            'Appologies ! Seems we are soldout for the selected dates,please leave your details we will getback with in 24 hours. '
+        });
+        //this.bookingButtonLabel = 'Enquire';
+      } else {
+        //this.bookingButtonLabel = 'Book';
+      }
+    } else {
+      this.msgs.push({
+        severity: 'error',
+        summary: response.status + ':' + response.statusText
+      });
+
+    }
+  },
+    error => this.handleError(error)
+  );
+}
+
+submitPayment()
+ {
+   console.log('payment');
+  if (this.booking.modeOfPayment != null && this.booking.modeOfPayment === 'Card') {
+    this.chargeCreditCard();
+  } else if (this.booking.modeOfPayment != null && this.booking.modeOfPayment != 'Card') {
+    this.loader = true;
+    this.payment.amount = this.booking.payableAmount;
+    this.payment.paymentMode = this.booking.modeOfPayment;
+    this.payment.currency = 'NZD';
+    this.payment.email = this.booking.email;
+    this.payment.businessEmail = this.booking.businessEmail;
+    this.payment.description = `Accomodation for  ${this.booking.firstName}  at  ${this.token.getPropertyName()}`;
+    this.createBooking(this.booking);
+  }
+ }
+
+ completedPage()
+{
+  this.dateModel.payment = this.payment;
+  this.dateModel.booking = this.booking;
+
+  let navigationExtras: NavigationExtras = {
+    queryParams: {
+        dateob: JSON.stringify(this.dateModel),
+    }
+  };
+  this.router.navigate(['/booking/complete'],navigationExtras );
+}
+
+sendConfirmationMessage() {
+  let msg = new Msg();
+  msg.fromNumber = SMS_NUMBER;
+  msg.toNumber = this.booking.mobile ;
+  msg.message = `Dear ${this.booking.firstName},Rsvn#:${this.booking.id},${this.booking.roomName},Chk-In:${this.booking.fromDate},Chk-Out:${this.booking.toDate},Amt:${this.booking.payableAmount}NZD.Thx.${this.booking.businessName},${this.booking.mobile}` ;
+
+  this.apiService.sendTextMessage(msg).subscribe(response1 => {
+    msg = response1.body;
+    if ( msg.sid !== undefined ||  msg.sid !== null ) {
+      this.openSuccessSnackBar('Booking Confirmation Sent.');
+    }
+  },
+  error => { if (error instanceof HttpErrorResponse) {
+    this.openErrorSnackBar('Error in sending sms');
+  }
+});
+}
+
+ createBooking(booking: Booking) {
+
+  const createBookingObsr = this.apiService.createBooking(booking).subscribe(response => {
+    if (response.status === 200) {
+      this.booking = response.body;
+      if (this.booking.id != null) {
+
+        this.openSuccessSnackBar(`Thanks for the booking .Please not the Reservation No:  # ${this.booking.id} and an email is sent with the booking details.`);
+        // this.msgs.push({
+        //   severity: 'success',
+        //   detail:
+        //     `Thanks for the booking .Please not the Reservation No:  # ${this.booking.id} and an email is sent with the booking details.`
+        // });
+        if ( this.booking.mobile !== null && this.booking.mobile !== undefined ) {
+        this.sendConfirmationMessage();
+      }
+        this.payment.referenceNumber = this.booking.id.toString();
+        this.payment.externalReference = this.booking.externalBookingID;
+        this.apiService.savePayment(this.payment).subscribe(res => {
+          if (res.status === 200) {
+            this.openSuccessSnackBar(`Payment Details Saved`);
+          } else {
+            this.openErrorSnackBar(`Error in updating payment details`);
+          }
+        }
+        );
+         this.completedPage();
+        this.loader = false;
+      } else {
+        this.loader = false;
+        // this.msgs.push({
+        //   severity: 'error',
+        //   summary: 'Please check the booking details and try again !'
+        // });
+      }
+    } else {
+      this.loader = false;
+      // this.msgs.push({
+      //   severity: 'error',
+      //   summary: response.statusText + ':' + response.statusText
+      // });
+    }
+  });
+  /*setTimeout(() => {
+    this.msgs = [];
+    createBookingObsr.unsubscribe();
+    this.spinner = false;
+    this.msgs.push({
+      severity: 'error',
+      summary: 'The server is taking more than usual time,please try again after sometime.'
+    });
+  }, 25000); */
+}
+
+ chargeCreditCard() {
+  this.loader = true;
+  (<any>window).Stripe.card.createToken({
+    number: this.payment.cardNumber,
+    exp_month: this.payment.expMonth,
+    exp_year: this.payment.expYear,
+    cvc: this.payment.cvv,
+
+  }, (status: number, response: any) => {
+
+    if (status === 200) {
+
+      const token = response.id;
+      this.payment.token = token;
+      this.payment.amount = this.booking.payableAmount;
+      this.payment.currency = 'NZD';
+      this.payment.email = this.booking.email;
+      this.payment.businessEmail = this.booking.businessEmail;
+      this.payment.paymentMode = this.booking.modeOfPayment;
+      this.payment.description = `Accomodation for   ${this.booking.firstName} at ${this.booking.businessName}` ;
+      this.processPayment(this.payment);
+    } else {
+      this.loader = false;
+      const snackBarRef = this.snackBar.open('Error message :' + response.error.message);
+      snackBarRef.dismiss();
+    }
+  });
+}
+processPayment(payment: Payment) {
+
+  this.apiService.processPayment(payment)
+    .subscribe(response => {
+
+      if (response.status === 200) {
+        this.payment = response.body;
+        if (this.payment.status === 'Paid') {
+          const snackBarRef = this.snackBar.open('Payment processed successfully.Creating booking ...', 'close');
+          snackBarRef._dismissAfter(5000);
+          this.createBooking(this.booking);
+        } else {
+          this.loader = false;
+          this.snackBar.open('ErroCode:' + payment.failureCode + 'and Error message :' + payment.failureMessage, '', {
+            duration: 5000,
+          });
+        }
+      } else {
+        this.loader = false;
+      }
+
+    });
+
+}
+
+private handleError(error: HttpErrorResponse) {
+  this.msgs = [];
+  this.loader = false;
+  if (error.error instanceof ErrorEvent) {
+    this.msgs.push({
+      severity: 'error',
+      summary: ` The server responded with  erorr code : ${error.status} ,
+          please email   ${this.booking.businessEmail} to the proceed with the booking `
+
+    });
+  } else {
+    this.msgs.push({
+      severity: 'error',
+      summary: ` Erorr code : ${error.status} ,
+          please  email   ${this.booking.businessEmail} to the proceed with the booking `
+    });
+  }
+  // return an observable with a user-facing error message
+  /*return throwError(
+    ` The server responded with  erorr code : ${error.status} ,
+          please  email   ${this.booking.businessEmail} to the proceed with the booking `
+  );*/
+}
+
 
  onChangeRoom($event, roomNumber : number)
  {
@@ -138,5 +454,23 @@ export class NewBookingComponent implements OnInit {
    this.yearSelected2 = yearAndMonth[0];
    this.monthSelected2 = parseInt(yearAndMonth[1])-1;
  }
+
+ openErrorSnackBar(message: string) {
+  this.snackBar.open(message, 'Error!', {
+    panelClass: ['mat--errors'],
+    verticalPosition: 'top',
+    horizontalPosition: 'right',
+    duration: 4000
+  });
+}
+openSuccessSnackBar(message: string) {
+  this.snackBar.open(message, 'Success!', {
+    panelClass: ['mat--success'],
+    verticalPosition: 'top',
+    horizontalPosition: 'right',
+    duration: 4000
+  });
+}
+
 
 }

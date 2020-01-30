@@ -3,6 +3,7 @@ import { Property } from 'src/app/property/property';
 import { ApiService, PROPERTY_ID } from 'src/app/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Room } from 'src/app/room/room';
+import { TokenStorage } from '../../../token.storage';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
 
   property: Property;
   rooms: Room[];
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,
+    private token :TokenStorage) { }
 
   ngOnInit() {
     this.getProperty();
@@ -37,8 +39,8 @@ export class HeaderComponent implements OnInit {
   getProperty() {
     this.apiService.getPropertyDetailsByPropertyId(PROPERTY_ID).subscribe(response => {
 
-     // console.log('response room ' + JSON.stringify(response.body));
       this.property = response.body;
+      this.token.savePropertyName(this.property.name);
     },
       error => {
         if (error instanceof HttpErrorResponse) {
