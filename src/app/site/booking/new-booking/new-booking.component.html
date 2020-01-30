@@ -72,9 +72,9 @@
                             </div><!--check-form end-->
                             <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                           </li>
-                          <!-- <li class="check-avail">
+                          <li class="check-avail" *ngIf ="this.dateModel.checkedin ==undefined || this.dateModel.checkedin ==undefined">
                             <a (click)="getRoomByDate()" title="" class="check-status">CHECK AVAILABILITY</a>
-                          </li> -->
+                          </li>
                         </ul>
                         <div class="clearfix"></div>
                       </div>
@@ -101,7 +101,7 @@
                     <mat-card-title>Add Booking Informatıons</mat-card-title>
                     <mat-card class="card-back">
 
-                    <form [formGroup]="onBookingForm">
+                    <form [formGroup]="onBookingForm" *ngIf ="this.isAvailableChecked">
                       <div class="row">
                         <div class="row">
                         <div class="col-lg-6">

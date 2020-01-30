@@ -31,4 +31,9 @@ export class RoomsComponent implements OnInit {
   );
   }
 
+  onRoomBook()
+  {
+
+  }
+
 }

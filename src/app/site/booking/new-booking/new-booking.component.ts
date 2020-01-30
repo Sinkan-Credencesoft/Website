@@ -136,6 +136,8 @@ export class NewBookingComponent implements OnInit {
     cardNumber: this.cardNumber,
   });
 
+  isAvailableChecked : boolean;
+
   constructor(private apiService: ApiService,
     private router : Router,
     private formBuilder: FormBuilder,
@@ -160,19 +162,59 @@ export class NewBookingComponent implements OnInit {
 
         this.room = this.dateModel.room;
 
-        this.getCheckInDateFormat(this.dateModel.checkedin);
-        this.getCheckOutDateFormat(this.dateModel.checkout);
+        if(this.dateModel.checkedin !=undefined && this.dateModel.checkout !=undefined)
+        {
+          this.isAvailableChecked = true;
+          this.getCheckInDateFormat(this.dateModel.checkedin);
+          this.getCheckOutDateFormat(this.dateModel.checkout);
 
-        this.booking.businessEmail = this.booking.email;
-        this.booking.fromDate = this.dateModel.checkedin;
-        this.booking.toDate = this.dateModel.checkout;
-        this.booking.roomId = parseInt(this.room.id);
-        this.booking.propertyId = PROPERTY_ID;
-        this.checkAvailabilty();
+          this.booking.businessEmail = this.booking.email;
+          this.booking.fromDate = this.dateModel.checkedin;
+          this.booking.toDate = this.dateModel.checkout;
+          this.booking.roomId = parseInt(this.room.id);
+          this.booking.propertyId = PROPERTY_ID;
+          this.checkAvailabilty();
+        }
+        else
+        {
+          this.isAvailableChecked = false;
+          this.checkincheckoutDate();
+        }
+
     }
 
   });
  }
+
+ checkincheckoutDate()
+ {
+   let currentDate: Date = new Date();
+   this.daySelected = this.getDay(currentDate);
+   this.yearSelected = String(currentDate.getFullYear());
+   this.monthSelected = currentDate.getMonth();
+
+
+   let afterDate: Date = new Date();
+   afterDate.setDate(currentDate.getDate()+1);
+
+   this.daySelected2 = this.getDay(afterDate);
+   this.yearSelected2 = String(afterDate.getFullYear());
+   this.monthSelected2 = afterDate.getMonth();
+ }
+ getDay(date:Date)
+ {
+   if(date.getDate().toString().length==1)
+   {
+       this.currentDay = '0'+date.getDate();
+   }
+   else
+   {
+       this.currentDay = ''+date.getDate();
+   }
+
+   return this.currentDay;
+ }
+
 
  checkAvailabilty() {
 
@@ -213,7 +255,6 @@ export class NewBookingComponent implements OnInit {
 
 submitPayment()
  {
-   console.log('payment');
   if (this.booking.modeOfPayment != null && this.booking.modeOfPayment === 'Card') {
     this.chargeCreditCard();
   } else if (this.booking.modeOfPayment != null && this.booking.modeOfPayment != 'Card') {
@@ -230,6 +271,7 @@ submitPayment()
 
  completedPage()
 {
+  console.log('complete page');
   this.dateModel.payment = this.payment;
   this.dateModel.booking = this.booking;
 
@@ -265,13 +307,13 @@ sendConfirmationMessage() {
     if (response.status === 200) {
       this.booking = response.body;
       if (this.booking.id != null) {
-
+        console.log('booking complete'+JSON.stringify(this.booking));
         this.openSuccessSnackBar(`Thanks for the booking .Please not the Reservation No:  # ${this.booking.id} and an email is sent with the booking details.`);
-        // this.msgs.push({
-        //   severity: 'success',
-        //   detail:
-        //     `Thanks for the booking .Please not the Reservation No:  # ${this.booking.id} and an email is sent with the booking details.`
-        // });
+        this.msgs.push({
+          severity: 'success',
+          detail:
+            `Thanks for the booking .Please not the Reservation No:  # ${this.booking.id} and an email is sent with the booking details.`
+        });
         if ( this.booking.mobile !== null && this.booking.mobile !== undefined ) {
         this.sendConfirmationMessage();
       }
@@ -280,7 +322,9 @@ sendConfirmationMessage() {
         this.apiService.savePayment(this.payment).subscribe(res => {
           if (res.status === 200) {
             this.openSuccessSnackBar(`Payment Details Saved`);
+            console.log('payment save');
           } else {
+            console.log('payment error');
             this.openErrorSnackBar(`Error in updating payment details`);
           }
         }
@@ -289,28 +333,29 @@ sendConfirmationMessage() {
         this.loader = false;
       } else {
         this.loader = false;
-        // this.msgs.push({
-        //   severity: 'error',
-        //   summary: 'Please check the booking details and try again !'
-        // });
+        console.log('booking error');
+        this.msgs.push({
+          severity: 'error',
+          summary: 'Please check the booking details and try again !'
+        });
       }
     } else {
       this.loader = false;
-      // this.msgs.push({
-      //   severity: 'error',
-      //   summary: response.statusText + ':' + response.statusText
-      // });
+      this.msgs.push({
+        severity: 'error',
+        summary: response.statusText + ':' + response.statusText
+      });
     }
   });
-  /*setTimeout(() => {
+  setTimeout(() => {
     this.msgs = [];
     createBookingObsr.unsubscribe();
-    this.spinner = false;
+    this.loader = false;
     this.msgs.push({
       severity: 'error',
       summary: 'The server is taking more than usual time,please try again after sometime.'
     });
-  }, 25000); */
+  }, 25000);
 }
 
  chargeCreditCard() {
@@ -333,9 +378,11 @@ sendConfirmationMessage() {
       this.payment.businessEmail = this.booking.businessEmail;
       this.payment.paymentMode = this.booking.modeOfPayment;
       this.payment.description = `Accomodation for   ${this.booking.firstName} at ${this.booking.businessName}` ;
+      console.log('chargeCreditCard'+JSON.stringify(this.payment));
       this.processPayment(this.payment);
     } else {
       this.loader = false;
+      console.log('chargeCred error');
       const snackBarRef = this.snackBar.open('Error message :' + response.error.message);
       snackBarRef.dismiss();
     }
@@ -348,12 +395,14 @@ processPayment(payment: Payment) {
 
       if (response.status === 200) {
         this.payment = response.body;
+        console.log('payment complete'+JSON.stringify(this.payment));
         if (this.payment.status === 'Paid') {
           const snackBarRef = this.snackBar.open('Payment processed successfully.Creating booking ...', 'close');
           snackBarRef._dismissAfter(5000);
           this.createBooking(this.booking);
         } else {
           this.loader = false;
+          console.log('payment error');
           this.snackBar.open('ErroCode:' + payment.failureCode + 'and Error message :' + payment.failureMessage, '', {
             duration: 5000,
           });
@@ -370,6 +419,7 @@ private handleError(error: HttpErrorResponse) {
   this.msgs = [];
   this.loader = false;
   if (error.error instanceof ErrorEvent) {
+    console.log('error.status'+error.status);
     this.msgs.push({
       severity: 'error',
       summary: ` The server responded with  erorr code : ${error.status} ,
