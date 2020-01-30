@@ -104,4 +104,18 @@ export class SliderComponent implements OnInit {
     return yearAndMonth[0]+'-'+yearAndMonth[1]+'-'+ yearAndMonth[2].split(" ", 1);
   }
 
+  checkedInEvent()
+  {
+    let currentDate: Date = new Date(this.checkedin.value);
+
+    let afterDate: Date = new Date();
+    afterDate.setDate(currentDate.getDate()+1);
+    afterDate.setFullYear(currentDate.getFullYear());
+    afterDate.setMonth(currentDate.getMonth());
+
+    this.day2 = this.getDay(afterDate);
+    this.year2 = String(afterDate.getFullYear());
+    this.month2 = afterDate.getMonth();
+  }
+
 }

@@ -229,7 +229,7 @@
                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                 </span>
               </div>
-              <input type="text" [formControl]="checkedin" name="dateIn"  class="date-pick" >
+              <input type="text" [formControl]="checkedin" name="dateIn"  class="date-pick" (ngModelChange)="checkedInEvent()" >
 
               <div class="clearfix"></div>
             </div><!--check-form end-->

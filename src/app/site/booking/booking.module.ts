@@ -12,12 +12,14 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { BookingDetailsComponent } from './booking-details/booking-details.component';
 const routes: Routes = [
   { path: '', component: BookingComponent},
   { path: 'booking/choose', component: ChooseRoomComponent},
   { path: 'booking/booking', component: NewBookingComponent},
   { path: 'booking/payment', component: CheckoutComponent},
-  { path: 'booking/complete', component: CompleteComponent}
+  { path: 'booking/complete', component: CompleteComponent},
+  { path: 'booking/detals', component: BookingDetailsComponent}
 ];
 @NgModule({
   imports: [
@@ -31,6 +33,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  declarations: [BookingComponent, CheckoutComponent, NewBookingComponent, ChooseRoomComponent, CompleteComponent]
+  declarations: [BookingComponent, CheckoutComponent, NewBookingComponent, ChooseRoomComponent, CompleteComponent, BookingDetailsComponent]
 })
 export class BookingModule { }

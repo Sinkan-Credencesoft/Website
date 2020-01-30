@@ -35,7 +35,7 @@
                                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                                 </span>
                               </div>
-                              <input type="text" name="dateIn" class="date-pick">
+                              <input type="text" [formControl]="checkedin" [disabled]="isAvailableChecked" name="dateIn" class="date-pick" (ngModelChange)="checkedInEvent()" >
                               <div class="clearfix"></div>
                             </div><!--check-form end-->
                           </li>
@@ -49,7 +49,7 @@
                                   <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                                 </span>
                               </div>
-                              <input type="text" name="dateOut" class="date-pick">
+                              <input type="text"  [formControl]="checkedout" [disabled]="isAvailableChecked" name="dateOut" class="date-pick" (ngModelChange)="checkedOutEvent()">
                               <div class="clearfix"></div>
                             </div><!--check-form end-->
                           </li>
@@ -72,9 +72,9 @@
                             </div><!--check-form end-->
                             <a href="#" title="" class="arw-down"><i class="fa fa-angle-down"></i></a>
                           </li>
-                          <!-- <li class="check-avail">
-                            <a (click)="getRoomByDate()" title="" class="check-status">CHECK AVAILABILITY</a>
-                          </li> -->
+                          <li class="check-avail">
+                            <a (click)="getRoomByDate()" *ngIf="!isAvailableChecked" title="" class="check-status">CHECK AVAILABILITY</a>
+                          </li>
                         </ul>
                         <div class="clearfix"></div>
                       </div>
@@ -94,122 +94,169 @@
                 </div>
                 <div class="col-lg-8">
                   <div class="booking_form">
-                    <span class="guest-notif">You are booking for property.name's {{ this.room.name }}. </span>
-                    <!--<div class="services_select">
-                    <div class="seachby">
-                      <h3>Add Extra Servıces</h3>
-                      <ul>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_11" >
-                            <label for="c_11"><span></span><b>Wifi : 100 $ ( Room / Night ) = 700 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_12">
-                            <label for="c_12"><span></span><b>Sea View : 10 $ ( Room / Night ) = 200 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_13">
-                            <label for="c_13"><span></span><b>Car Rental : 30 $ ( Room / Night ) = 200 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_14">
-                            <label for="c_14"><span></span><b>Laundry : 10 $ ( Guest / Night ) = 400 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_15">
-                            <label for="c_15"><span></span><b>Satellite TV : 50 $ ( Room / Trip ) = 250 $</b></label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="inp-field">
-                            <input type="checkbox" name="cc2" id="c_16">
-                            <label for="c_16"><span></span><b>Breakfast : 10 $ ( Guest / Night ) = 150 $</b></label>
-                          </div>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>services_select end-->
-                  <div class="information_form">
+                    <span class="guest-notif">You are booking for {{this.token.getPropertyName()}}'s {{ this.room.name }}. </span>
+
+                  <div class="information_form" *ngIf="isAvailableChecked">
                     <h3>Add Booking Informatıons</h3>
                     <form [formGroup]="onBookingForm">
                       <div class="row">
+
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>First Name</label>
-                            <input type="text"
-                              name="firstName"
-                              [formControl]="firstName"
-                              [(ngModel)]="booking.firstName"
-                             placeholder="">
-                          </div><!--form-field end-->
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>First Name</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            placeholder="First Name"
+                            [formControl]="firstName"
+                            [(ngModel)]="booking.firstName"
+
+                          />
+                          <mat-error *ngIf="!firstName.valid && firstName.touched"
+                            >First Name is required</mat-error
+                          >
+
+                        </mat-form-field>
                         </div>
+
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Last Name</label>
-                            <input type="text"
-                            name="lastName"
-                            placeholder=""
+
+
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>Last Name</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            placeholder="Last Name"
                             [formControl]="lastName"
-                            [(ngModel)]="booking.lastName">
-                          </div><!--form-field end-->
+                            [(ngModel)]="booking.lastName"
+                          />
+                          <mat-error *ngIf="!lastName.valid && lastName.touched"
+                            >Last Name is required</mat-error
+                          >
+
+                        </mat-form-field>
                         </div>
+
+
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Email *</label>
-                            <input type="email"
-                            name="email"
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>Email</mat-label>
+                          <input
+                            type="email"
+                            matInput
+                            placeholder="Email"
                             [formControl]="bookingEmail"
                             [(ngModel)]="booking.email"
-                            placeholder="">
-                          </div><!--form-field end-->
+
+                          />
+                          <mat-error *ngIf="!bookingEmail.valid && bookingEmail.touched"
+                            >Invalid Email Address!</mat-error
+                          >
+
+                        </mat-form-field>
+
                         </div>
+
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Phone Number *</label>
-                            <input type="text" name="mobile" placeholder=""
+
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>Phone Number</mat-label>
+                          <input
+                            type="text"
+                            matInput
+                            placeholder="Contact Number"
+                            minlength="9"
+                            maxlength="14"
+                            pattern="[0-9]"
                             [formControl]="bookingContact"
-                            [(ngModel)]="booking.mobile">
-                          </div><!--form-field end-->
+                            [(ngModel)]="booking.mobile"
+
+                          />
+                          <mat-error
+                            *ngIf="!bookingContact.valid && bookingContact.touched"
+                            >Invalid Contact Number !</mat-error
+                          >
+                          <mat-error *ngIf="bookingContact.minlength"
+                            >Invalid Contact Number !</mat-error
+                          >
+                          <mat-error *ngIf="bookingContact.maxlength"
+                            >Invalid Contact Number !</mat-error
+                          >
+
+                        </mat-form-field>
+
                         </div>
+
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Number of Room</label>
-                            <input type="number" name="noOfRoom" placeholder="" [formControl]="noOfRooms"
+
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                          appearance="outline"
+                        >
+                        <mat-label>No of Rooms</mat-label>
+
+                          <input
+                            type="number"
+                            matInput
+                            placeholder="No of Rooms"
+                            [formControl]="noOfRooms"
                             [(ngModel)] ="booking.noOfRooms"
                             (ngModelChange)="onChangeRoom($event,room.noOfRooms)"
                             min="1"
-                            max="{{ room.noOfRooms }}">
-                          </div><!--form-field end-->
+                            max="{{ room.noOfRooms }}"
+
+                          />
+
+                        </mat-form-field>
+
+
                         </div>
                         <div class="col-lg-6">
-                          <div class="form-field">
-                            <label>Number of Guest</label>
-                            <input type="number" name="noOfGuest" placeholder=""
-                            [formControl]="noOfPersons"
-                            (ngModelChange)="onChangePerson($event,room.maximumOccupancy*booking.noOfRooms)"
-                            [(ngModel)]="booking.noOfPersons"
-                            min="1"
-                            max="{{ room.maximumOccupancy*booking.noOfRooms }}">
-                          </div><!--form-field end-->
+
+                          <mat-form-field
+                          class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+                            appearance="outline"
+                          >
+                          <mat-label>No Of Person(s)</mat-label>
+                            <input
+                              type="number"
+                              matInput
+                              placeholder="No Of Person(s)"
+                              [formControl]="noOfPersons"
+                              (ngModelChange)="onChangePerson($event,room.maximumOccupancy*booking.noOfRooms)"
+                              [(ngModel)]="booking.noOfPersons"
+                              min="1"
+                              max="{{ room.maximumOccupancy*booking.noOfRooms }}"
+
+                            />
+                            <mat-error *ngIf="!noOfPersons.valid && noOfPersons.touched"
+                              >No Of Person Required!</mat-error
+                            >
+
+                          </mat-form-field>
+
                         </div>
+
 
                         <div class="col-lg-12">
                           <div class="seachby">
                             <ul>
                               <li>
                                 <div class="inp-field">
-                                  <!-- <input type="checkbox" [formControl]="termAndConditions" name="cc8" id="c87">
-                                  <label for="c87"><span></span><b>Terms and conditions *</b></label> -->
+
                                 </div>
                               </li>
                             </ul>
@@ -218,8 +265,9 @@
                         </div>
                         <div class="col-lg-12">
                           <div class="form-submit">
+                            <!--  [disabled]="!onBookingForm.valid" -->
                             <button mat-raised-button
-                                [disabled]="!onBookingForm.valid"
+                                *ngIf="onBookingForm.valid"
                                 (click)="onCheckOut()"
                                 class="lnk-default"
                                 color="primary">
