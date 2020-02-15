@@ -10,12 +10,11 @@ import { Observable } from 'rxjs';
 import { BookingDetails } from './bookingdetail/bookingdetails';
 import { GuestReview } from './guest/guest.component';
 
-//const API_URL = 'http://app.bookonepms.com:9080/api-bookone/api/website';
+ //const API_URL = 'http://app.bookonepms.com:9080/api-bookone/api/website';
 // const API_URL2 = 'http://app.bookonepms.com:9080/api-bookone';
-const API_URL2 = 'https://booking-api-csoft.appspot.com';
-export const SMS_NUMBER = '+1 956 903 2629';
-const API_URL = 'https://booking-api-csoft.appspot.com/api/website';
-//const API_URL = 'https://booking-api-csoft-in.appspot.com/api/website';
+ export const SMS_NUMBER = '+1 956 903 2629';
+// const API_URL2 = 'https://booking-api-csoft.appspot.com';
+ const API_URL = 'https://booking-api-csoft.appspot.com/api/website';
 // production
 //export const PROPERTY_ID = 92;
 // development
