@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './site/home/home.component';
 import { AmenitiesComponent } from './amenities/amenities.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -40,11 +39,9 @@ import { LayoutModule } from './shared/layout/layout.module';
 import { FooterComponent } from './shared/layout/footer/footer.component';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
-import { HomeModule } from './site/home/home.module';
 import { DetailsComponent } from './site/rooms/details/details.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TokenStorage } from '../../src/app/token.storage';
-
 import { AboutComponent } from './site/about/about.component';
 const routes: Routes = [
   { path: '', component: SiteModule},
@@ -92,6 +89,7 @@ const routes: Routes = [
     AppMaterialModules,
     FormsModule,
     ReactiveFormsModule,
+
     RouterModule.forRoot(routes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAYT8pe61MUbk27eiYi9LnnPhwo031Ye7w'
@@ -105,7 +103,7 @@ const routes: Routes = [
     TokenStorage,
     HTTPStatus,
     TokenStorage,
-    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    // {provide: LocationStrategy, useClass: HashLocationStrategy},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
