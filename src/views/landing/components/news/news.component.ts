@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { WPAPIService } from 'src/app/services/wpapi.service';
-import { subscribeOn } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { WPAPIService } from 'src/services/wpapi.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NewsComponent implements OnInit {
   // @Input() token;
-  search: string;
+  search: any;
   posts: any = null;
   categories: any = null;
   page: string | number;
@@ -19,17 +18,17 @@ export class NewsComponent implements OnInit {
 
   constructor( private wpApiService: WPAPIService,
     private route: ActivatedRoute) {
-    this.page = this.route.snapshot.paramMap.get('page') ? this.route.snapshot.paramMap.get('page') : 1;
+    this.page= this.route.snapshot.paramMap.get('page') ? this.route.snapshot.paramMap.get('page') : 1;
   }
   ngOnInit() {
-    this.wpApiService.posts('per_page=12').subscribe(posts => {this.posts = posts; console.log(this.posts); });
+    this.wpApiService.posts('per_page=12').subscribe((posts: any) => {this.posts = posts; console.log(this.posts); });
 
   }
-getSearch(search) {
+getSearch() {
   // this.wpApiService.posts('search=' + search).subscribe(posts => {this.posts = posts; });
 }
-getCategoryFilter(search) {
-  this.wpApiService.posts('categories=' + search).subscribe(posts => {this.posts = posts; });
+getCategoryFilter(search: any) {
+  this.wpApiService.posts('categories=' + search).subscribe((posts: any) => {this.posts = posts; });
 
 }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NguCarouselConfig } from "@ngu/carousel";
 @Component({
   selector: "app-testimonial-caurosel",
-  templateUrl: "./testimonial-caurosel.component.html",
+  templateUrl:"./testimonial-caurosel.component.html",
   styleUrls: ["./testimonial-caurosel.component.scss"]
 })
 export class TestimonialCauroselComponent implements OnInit {

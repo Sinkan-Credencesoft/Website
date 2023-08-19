@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WpApiPosts } from 'wp-api-angular';
-import { WPAPIService } from 'src/app/services/wpapi.service';
+import { WPAPIService } from 'src/services/wpapi.service';
 
 @Component({
   selector: 'app-news-two',
@@ -8,7 +8,7 @@ import { WPAPIService } from 'src/app/services/wpapi.service';
   styleUrls: ['./news-two.component.scss']
 })
 export class NewsTwoComponent implements OnInit {
-  @Input() token;
+  @Input() token: any;
 
   posts: any = null;
 
@@ -29,5 +29,5 @@ export class NewsTwoComponent implements OnInit {
   //     console.log(this.posts);
   //   });
   // }
-  
+
 }

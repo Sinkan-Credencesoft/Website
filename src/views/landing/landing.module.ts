@@ -4,8 +4,8 @@ import { WINDOW_PROVIDERS } from './helpers/window.helpers';
 import { NgModule } from '@angular/core';
 // import { NgForm } from "@angular/forms";
 import { CommonModule } from '@angular/common';
-import { NguCarouselModule } from '@ngu/carousel';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NguCarouselModule } from '@ngu/carousel';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingV1Component } from './landing-v1/landing-v1.component';
 import { Intro1Component } from './components/intro1/intro1.component';
@@ -48,7 +48,7 @@ import { IntroNineComponent } from './components/intro-nine/intro-nine.component
 import { LandingV9Component } from './landing-v9/landing-v9.component';
 import { IntroTenComponent } from './components/intro-ten/intro-ten.component';
 import { LandingV10Component } from './landing-v10/landing-v10.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+// import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DemosComponent } from './components/demos/demos.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
@@ -67,13 +67,13 @@ import { DynamicPricingComponent } from './components/dynamic-pricing/dynamic-pr
 import { AboutCredencesoftComponent } from './components/about-credencesoft/about-credencesoft.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
 import { OurFeaturesComponent } from './components/our-features/our-features.component';
-import {
-  MatCheckboxModule,
-  MatInputModule,
-  MatSelectModule,
-  MatRadioModule,
-  MatFormFieldModule
-} from '@angular/material';
+// import {
+  // MatCheckboxModule,
+  // MatInputModule,
+  // MatSelectModule,
+  // MatRadioModule,
+  // MatFormFieldModule
+// } from '@angular/material';
 import { CallToActionComponent } from './components/call-to-action/call-to-action.component';
 import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-email.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
@@ -83,15 +83,15 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
   imports: [
     CommonModule,
     LandingRoutingModule,
-    NguCarouselModule,
-    NgbModule,
+    // NguCarouselModule,
+    // NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatFormFieldModule,
+    // MatCheckboxModule,
+    // MatInputModule,
+    // MatSelectModule,
+    // MatRadioModule,
+    // MatFormFieldModule,
   ],
   declarations: [
     LandingV1Component,
@@ -103,6 +103,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     ServicesComponent,
     ServicesCauroselComponent,
     TestimonialComponent,
+    PrivacyPolicyComponent,
     TestimonialCauroselComponent,
     PricingOneComponent,
     ContactFormComponent,
@@ -114,7 +115,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     LeftImageComponent,
     RightImageComponent,
     TeamComponent,
-    NewsComponent,
+    // NewsComponent,
     FaqsComponent,
     NewsTwoComponent,
     IntroThreeComponent,
@@ -137,13 +138,13 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     IntroTenComponent,
     LandingV10Component,
     DemosComponent,
-    BlogDetailsComponent,
+    // BlogDetailsComponent,
     BlogDetailsPageComponent,
     IntroElevenComponent,
     LandingV11Component,
     WhyBookoneComponent,
     PricingFilterComponent,
-    DynamicPricingComponent,
+    // DynamicPricingComponent,
     AboutCredencesoftComponent,
     ContactDetailsComponent,
     OurFeaturesComponent,

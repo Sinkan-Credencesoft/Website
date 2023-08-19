@@ -15,7 +15,7 @@ import {WINDOW_PROVIDERS, WINDOW} from "../../helpers/window.helpers";
   styleUrls: ["./header-white.component.scss"]
 })
 export class HeaderWhiteComponent implements OnInit {
-  isFixed;
+  isFixed:any;
   public isCollapsed = true;
   constructor(
     @Inject(DOCUMENT) private document: Document,

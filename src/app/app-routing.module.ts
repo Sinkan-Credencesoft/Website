@@ -16,7 +16,7 @@ const routes: Routes = [
       {
         path: 'sessions',
 
-        loadChildren: () => import("./views/sessions/sessions.module").then(module => module.SessionsModule)
+        loadChildren: () => import("../views/sessions/sessions.module").then(module => module.SessionsModule)
       }
     ]
   },
@@ -26,7 +26,7 @@ const routes: Routes = [
     children: [
       {
         path: 'landing',
-        loadChildren: () => import( './views/landing/landing.module').then(x => x.LandingModule)
+        loadChildren: () => import( '../views/landing/landing.module').then(x => x.LandingModule)
 
       }
     ]

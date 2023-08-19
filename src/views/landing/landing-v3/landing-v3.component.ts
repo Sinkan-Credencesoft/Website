@@ -15,7 +15,7 @@ export class LandingV3Component implements OnInit {
   ngOnInit() {
   }
 
-  changeBg(colorName) {
+  changeBg(colorName:any) {
     this.backgroundColor = "landing-" + colorName;
   }
   toggleCustomizer() {

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NguCarouselConfig } from "@ngu/carousel";
+// import { NguCarouselConfig } from "@ngu/carousel";
 @Component({
   selector: "app-works-carousel",
   templateUrl: "./works-carousel.component.html",
   styleUrls: ["./works-carousel.component.scss"]
 })
 export class WorksCarouselComponent implements OnInit {
+
   public carouselTileItems: Array<any> = [
+
     {
       photo: "./assets/images/landing/products/products9.svg",
       text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
@@ -52,17 +54,17 @@ export class WorksCarouselComponent implements OnInit {
     4: [],
     5: []
   };
-  public carouselTile: NguCarouselConfig = {
-    grid: { xs: 1, sm: 2, md: 3, lg: 3, all: 0 },
-    slide: 3,
-    speed: 250,
-    point: {
-      visible: true
-    },
-    load: 2,
-    velocity: 0,
-    touch: true,
-    easing: "cubic-bezier(0, 0, 0.2, 1)"
-  };
+  // public carouselTile: NguCarouselConfig = {
+  //   grid: { xs: 1, sm: 2, md: 3, lg: 3, all: 0 },
+  //   slide: 3,
+  //   speed: 250,
+  //   point: {
+  //     visible: true
+  //   },
+  //   load: 2,
+  //   velocity: 0,
+  //   touch: true,
+  //   easing: "cubic-bezier(0, 0, 0.2, 1)"
+  // };
   ngOnInit() {}
 }

@@ -12,7 +12,7 @@ export class LandingV6Component implements OnInit {
 
   ngOnInit() {}
 
-  changeBg(colorName) {
+  changeBg(colorName: string) {
     this.backgroundColor = "landing-" + colorName;
   }
   toggleCustomizer() {

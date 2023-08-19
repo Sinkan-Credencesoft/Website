@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
-import { CurrencyService } from 'src/app/services/currency.service';
+// import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
+// import { CurrencyService } from 'src/app/services/currency.service';
 import { SubmitData } from './submitData';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { constructor } from 'jquery';
+import { SharedAnimations } from 'src/shared/animations/shared-animations';
+import { CurrencyService } from 'src/services/currency.service';
+// import { constructor } from 'jquery';
 
 @Component({
   selector: 'app-dynamic-pricing',
@@ -36,7 +38,7 @@ export class DynamicPricingComponent implements OnInit {
   OPIChecked = false;
   HMAChecked = false;
 
-  selectedSubscriptionArray: string[];
+  selectedSubscriptionArray: string[] = [];
 
   subscriptionCount = 1;
   discountAmount = 0;
@@ -93,7 +95,7 @@ setCurrencyRate() {
     this.currencyService.getCurrencyRate()
       .subscribe(response => {
         this.Currency = response.body;
-      console.log('currency : ' + JSON.stringify( response.body.quotes ));
+      console.log('currency : ' + JSON.stringify( response?.body?.quotes));
       this.rates = this.Currency.quotes;
     });
     console.log('data ' + JSON.stringify(this.rates));

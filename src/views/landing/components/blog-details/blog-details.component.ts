@@ -11,7 +11,7 @@ import { WPAPIService } from 'src/app/services/wpapi.service';
   styleUrls: ['./blog-details.component.scss']
 })
 export class BlogDetailsComponent implements OnInit {
-  @Input() token;
+  @Input() token: any;
   posts: any = null;
   categories: any = null;
 

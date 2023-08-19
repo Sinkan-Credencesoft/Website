@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NguCarouselConfig } from "@ngu/carousel";
+// import { NguCarouselConfig } from "@ngu/carousel";
 @Component({
   selector: 'app-works2',
   templateUrl: './works2.component.html',

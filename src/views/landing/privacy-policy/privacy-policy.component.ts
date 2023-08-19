@@ -13,9 +13,9 @@ export class PrivacyPolicyComponent implements OnInit {
 
   ngOnInit() {
   }
-  changeBg(colorName) {
-    this.backgroundColor = 'landing-' + colorName;
-  }
+  // changeBg(colorName) {
+  //   this.backgroundColor = 'landing-' + colorName;
+  // }
   toggleCustomizer() {
     this.showCustomizer = !this.showCustomizer;
 

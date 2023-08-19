@@ -26,9 +26,9 @@ export class ScrollToDirective implements OnInit {
     return 0;
   }
 
-  elmYPosition(eID) {
+  elmYPosition(eID:any) {
     var elm = document.getElementById(eID);
-    var y = elm.offsetTop;
+    var y = elm?.offsetTop??0;
     var node: any = elm;
     while (node.offsetParent && node.offsetParent != document.body) {
       node = node.offsetParent;
@@ -38,7 +38,7 @@ export class ScrollToDirective implements OnInit {
   }
 
   @HostListener("click", ["$event"])
-  smoothScroll(e) {
+  smoothScroll(e:any) {
     // console.log(e);
     e.preventDefault();
     if (!this.elmID) return;

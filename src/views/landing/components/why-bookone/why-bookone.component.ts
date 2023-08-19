@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NguCarouselConfig } from '@ngu/carousel';
+// import { NguCarouselConfig } from '@ngu/carousel';
 
 @Component({
   selector: 'app-why-bookone',
@@ -41,18 +41,18 @@ export class WhyBookoneComponent implements OnInit {
     4: [],
     5: []
   };
-  public carouselTile: NguCarouselConfig = {
-    grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
-    slide: 3,
-    speed: 250,
-    point: {
-      visible: true
-    },
-    load: 1,
-    velocity: 0,
-    touch: true,
-    easing: 'cubic-bezier(0, 0, 0.2, 1)'
-  };
+  // public carouselTile: NguCarouselConfig = {
+  //   grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
+  //   slide: 3,
+  //   speed: 250,
+  //   point: {
+  //     visible: true
+  //   },
+  //   load: 1,
+  //   velocity: 0,
+  //   touch: true,
+  //   easing: 'cubic-bezier(0, 0, 0.2, 1)'
+  // };
   constructor() { }
 
   ngOnInit() {

@@ -12,7 +12,7 @@ export class LandingV9Component implements OnInit {
 
   ngOnInit() {}
 
-  changeBg(colorName) {
+  changeBg(colorName: string) {
     this.backgroundColor = "landing-" + colorName;
   }
   toggleCustomizer() {

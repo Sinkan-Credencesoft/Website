@@ -7,8 +7,8 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./intro-eight.component.scss']
 })
 export class IntroEightComponent implements OnInit {
-  pageName: string;
-  pageSubTitle: string;
+  pageName: string | undefined;
+  pageSubTitle: string | undefined;
   constructor( public titleService: Title) { }
 
   ngOnInit() {

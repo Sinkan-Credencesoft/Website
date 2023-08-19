@@ -12,6 +12,7 @@ import { WpApiLoader, WpApiModule, WpApiStaticLoader } from 'wp-api-angular';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
@@ -27,6 +28,8 @@ export function WpApiLoaderFactory(http: Http) {
     RouterModule,
     BrowserAnimationsModule,
     NgSelectModule,
+    NgbModule,
+
     AppRoutingModule,
 
     WpApiModule.forRoot({ // <---

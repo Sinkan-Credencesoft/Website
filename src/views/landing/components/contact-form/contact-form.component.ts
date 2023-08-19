@@ -1,4 +1,4 @@
-import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
+// import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
